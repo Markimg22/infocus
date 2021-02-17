@@ -9,11 +9,11 @@ interface TimerProps {
   timeRest: number;
 }
 
-export default function Timer(props: TimerProps): JSX.Element {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [key, setKey] = useState(0);
-  const [timer, setTimer] = useState(props.timeTask);
-  const [isRest, setIsRest] = useState(false);
+export default function Timer({ timeRest, timeTask }: TimerProps): JSX.Element {
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [key, setKey] = useState<number>(0);
+  const [timer, setTimer] = useState<number>(timeTask);
+  const [isRest, setIsRest] = useState<boolean>(false);
 
   const handleTimer = () => {
     setIsPlaying(!isPlaying);
@@ -27,10 +27,10 @@ export default function Timer(props: TimerProps): JSX.Element {
     Vibration.vibrate(1000, true);
 
     if (!isRest) {
-      setTimer(props.timeRest);
+      setTimer(timeRest);
       setIsRest(true);
     } else {
-      setTimer(props.timeTask);
+      setTimer(timeTask);
       setIsRest(false);
     }
 

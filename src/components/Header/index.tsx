@@ -1,22 +1,27 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { StackHeaderProps } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-interface HeaderProps {
-  iconName: string;
-  iconDirection: any;
-  navigation: any;
-  pageNavigation: string;
+interface HeaderProps extends StackHeaderProps {
+  iconName: 'tasks' | 'angle-left';
+  iconDirection: 'flex-start' | 'flex-end';
+  pageNavigation: 'TimerPage' | 'CreateTasksPage';
 }
 
-export default function Header(props: HeaderProps): JSX.Element {
+export default function Header({
+  iconName,
+  iconDirection,
+  navigation,
+  pageNavigation,
+}: HeaderProps): JSX.Element {
   return (
     <View style={styles.container}>
       <Icon
-        name={props.iconName}
+        name={iconName}
         size={40}
-        style={[{ alignSelf: props.iconDirection }, styles.icon]}
-        onPress={() => props.navigation.navigate(props.pageNavigation)}
+        style={[{ alignSelf: iconDirection }, styles.icon]}
+        onPress={() => navigation.navigate(pageNavigation)}
       />
     </View>
   );

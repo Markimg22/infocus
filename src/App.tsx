@@ -1,16 +1,16 @@
 import React from 'react';
-import { SafeAreaView, View, Text } from 'react-native';
-import Timer from './components/Timer';
+import { StatusBar } from 'react-native';
+import AppStack from './routes/AppStack';
 
-export default function App() {
+export default function App(): JSX.Element {
   return (
     <>
-      <SafeAreaView>
-        <View>
-          <Text>Hello world!</Text>
-          <Timer />
-        </View>
-      </SafeAreaView>
+      <StatusBar
+        backgroundColor="transparent"
+        translucent
+        barStyle="dark-content"
+      />
+      <AppStack />
     </>
   );
 }

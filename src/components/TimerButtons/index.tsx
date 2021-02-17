@@ -8,20 +8,20 @@ interface ButtonsProps {
   resetTimer: () => void;
 }
 
-export default function TimerButtons(props: ButtonsProps): JSX.Element {
+export default function TimerButtons({
+  isPlaying = false,
+  handleTimer,
+  resetTimer,
+}: ButtonsProps): JSX.Element {
   return (
     <View style={styles.container}>
       <Icon
-        name={props.isPlaying ? 'pause-circle' : 'play-circle'}
-        color={props.isPlaying ? '#CFD8DC' : '#fff'}
+        name={isPlaying ? 'pause-circle' : 'play-circle'}
+        color={isPlaying ? '#CFD8DC' : '#fff'}
         style={styles.iconPlay}
-        onPress={props.handleTimer}
+        onPress={handleTimer}
       />
-      <Icon
-        name="undo-alt"
-        style={styles.iconReset}
-        onPress={props.resetTimer}
-      />
+      <Icon name="undo-alt" style={styles.iconReset} onPress={resetTimer} />
     </View>
   );
 }
