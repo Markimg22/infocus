@@ -67,7 +67,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 #### **Mobile**  ([React Native](http://www.reactnative.com/))
 
--   **[Expo](https://expo.io/)**
+-   **[Typescript](https://www.typescriptlang.org/)**
 -   **[React Navigation](https://reactnavigation.org/)**
 -   **[React Native SVG](https://github.com/react-native-community/react-native-svg)**
 -   **[React Countdown Circle Timer](https://www.npmjs.com/package/react-countdown-circle-timer)**
