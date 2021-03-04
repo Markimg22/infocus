@@ -19,8 +19,9 @@ export function Header({
     <View style={styles.container}>
       <Icon
         name={iconName}
+        color={'#fff'}
         size={40}
-        style={[{ alignSelf: iconDirection }, styles.icon]}
+        style={{ alignSelf: iconDirection }}
         onPress={() => navigation.navigate(pageNavigation)}
       />
     </View>
@@ -30,8 +31,8 @@ export function Header({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#282631',
-    paddingHorizontal: 20,
-    paddingVertical: 30,
+    // paddingHorizontal: 20,
+    // paddingVertical: 30,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -40,9 +41,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 10,
     elevation: 5,
-  },
-  icon: {
-    color: '#fff',
-    padding: 5,
   },
 });

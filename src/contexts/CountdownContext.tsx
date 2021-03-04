@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
 
 interface CountdownContextData {
+  time: number;
   minutes: number;
   seconds: number;
   hasFinished: boolean;
@@ -55,6 +56,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   return (
     <CountdownContext.Provider
       value={{
+        time,
         minutes,
         seconds,
         hasFinished,

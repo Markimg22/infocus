@@ -1,10 +1,10 @@
 import { CountdownContext } from 'contexts/CountdownContext';
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
 export function Countdown() {
-  const { minutes, seconds, isPlaying, resetCountdown } = useContext(
+  const { time, minutes, seconds, isPlaying, resetCountdown } = useContext(
     CountdownContext,
   );
 
@@ -12,50 +12,33 @@ export function Countdown() {
   const [secondLeft, secondRight] = String(seconds).padStart(2, '0').split('');
 
   return (
-    <View style={styles.container}>
-      <View>
-        <CountdownCircleTimer
-          isPlaying={isPlaying}
-          colors="#BB86FC"
-          strokeWidth={15}
-          size={200}
-          duration={minutes}
-          initialRemainingTime={minutes}
-          onComplete={resetCountdown}>
-          {({ remainingTime }) => {
-            if (typeof remainingTime !== 'undefined') {
-              return (
-                <View style={styles.timerContainer}>
-                  <Text style={styles.timerText}>
-                    {`${minuteLeft}${minuteRight}:${secondLeft}${secondRight}`}
-                  </Text>
-                  <Text style={styles.timerMsg}>
-                    {minutes > 1 ? 'minutos restantes' : 'minuto restante'}
-                  </Text>
-                </View>
-              );
-            }
-          }}
-        </CountdownCircleTimer>
-      </View>
-    </View>
+    <CountdownCircleTimer
+      isPlaying={isPlaying}
+      colors="#BB86FC"
+      strokeWidth={15}
+      size={200}
+      duration={time}
+      initialRemainingTime={time}
+      onComplete={resetCountdown}>
+      {({ remainingTime }) => {
+        if (typeof remainingTime !== 'undefined') {
+          return (
+            <View>
+              <Text style={styles.timerText}>
+                {`${minuteLeft}${minuteRight}:${secondLeft}${secondRight}`}
+              </Text>
+              <Text style={styles.timerInfoText}>
+                {minutes > 1 ? 'minutos restantes' : 'minuto restante'}
+              </Text>
+            </View>
+          );
+        }
+      }}
+    </CountdownCircleTimer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    height: Dimensions.get('window').height,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    marginTop: -30,
-  },
-  timerContainer: {
-    width: Dimensions.get('window').width,
-    alignItems: 'center',
-  },
-  countdownContainer: {
-    marginTop: -70,
-  },
   timerText: {
     color: '#fff',
     fontSize: 45,
@@ -69,7 +52,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  timerMsg: {
+  timerInfoText: {
     textAlign: 'center',
     color: '#fff',
     fontSize: 15,

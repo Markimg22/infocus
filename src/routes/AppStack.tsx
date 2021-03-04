@@ -4,7 +4,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { TimerPage } from '../pages/TimerPage';
 import { CreateTasksPage } from '../pages/CreateTasksPage';
 import { Header } from '../components/Header';
-import { CountdownProvider } from '../contexts/CountdownContext';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -17,23 +16,21 @@ export default function Routes() {
           headerShown: false,
           cardStyle: { flex: 1, backgroundColor: '#333238' },
         }}>
-        <CountdownProvider>
-          <Screen
-            name="TimerPage"
-            component={TimerPage}
-            options={{
-              headerShown: true,
-              header: (props) => (
-                <Header
-                  iconName="tasks"
-                  iconDirection="flex-end"
-                  pageNavigation="CreateTasksPage"
-                  {...props}
-                />
-              ),
-            }}
-          />
-        </CountdownProvider>
+        <Screen
+          name="TimerPage"
+          component={TimerPage}
+          options={{
+            headerShown: true,
+            header: (props) => (
+              <Header
+                iconName="tasks"
+                iconDirection="flex-end"
+                pageNavigation="CreateTasksPage"
+                {...props}
+              />
+            ),
+          }}
+        />
         <Screen
           name="CreateTasksPage"
           component={CreateTasksPage}

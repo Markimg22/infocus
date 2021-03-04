@@ -6,12 +6,13 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 export function ResetButton() {
   const { resetCountdown } = useContext(CountdownContext);
 
-  return <Icon name="undo-alt" style={styles.icon} onPress={resetCountdown} />;
+  return (
+    <Icon name="undo" size={40} onPress={resetCountdown} style={styles.icon} />
+  );
 }
 
 const styles = StyleSheet.create({
   icon: {
-    fontSize: 40,
     color: '#fff',
     shadowColor: '#000',
     shadowOffset: {
@@ -21,7 +22,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    marginLeft: 200,
-    marginBottom: 60,
   },
 });

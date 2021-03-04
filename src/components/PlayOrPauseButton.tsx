@@ -12,6 +12,7 @@ export function PlayOrPauseButton() {
     <Icon
       name={isPlaying ? 'pause-circle' : 'play-circle'}
       color={isPlaying ? '#CFD8DC' : '#fff'}
+      size={120}
       style={styles.icon}
       onPress={isPlaying ? pauseCountdown : startCountdown}
     />
@@ -20,7 +21,6 @@ export function PlayOrPauseButton() {
 
 const styles = StyleSheet.create({
   icon: {
-    fontSize: 120,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
