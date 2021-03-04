@@ -8,10 +8,10 @@ import {
   Text,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import ListTasks from '../../components/ListTasks';
-import Form from '../../components/Form';
+import { ListTasks } from '../components/ListTasks';
+import { Form } from '../components/Form';
 
-export default function CreateTasksPage(): JSX.Element {
+export function CreateTasksPage() {
   const [tasks, setTasks] = useState<string[]>([]);
   const [newTask, setNewTask] = useState<string>('');
 

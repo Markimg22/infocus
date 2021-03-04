@@ -1,10 +1,11 @@
 {
   "code-runner.clearPreviousOutput": true,
   "code-runner.executorMap": {
-    "typescript": "npx ts-node --files --transpile-only",
+    "typescript": "npx ts-node --files --transpile-only"
   },
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
-    "source.fixAll.eslint": true,
+    "source.fixAll.eslint": true
   },
+  "editor.formatOnSave": true
 }

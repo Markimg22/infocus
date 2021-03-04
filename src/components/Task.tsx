@@ -7,7 +7,7 @@ interface TaskProps {
   removeTask: (item: string) => void;
 }
 
-export default function Task({ item, removeTask }: TaskProps): JSX.Element {
+export function Task({ item, removeTask }: TaskProps) {
   const [done, setDone] = useState<boolean>(false);
 
   return (

@@ -8,11 +8,11 @@ interface ButtonsProps {
   resetTimer: () => void;
 }
 
-export default function TimerButtons({
-  isPlaying = false,
+export function TimerButtons({
+  isPlaying,
   handleTimer,
   resetTimer,
-}: ButtonsProps): JSX.Element {
+}: ButtonsProps) {
   return (
     <View style={styles.container}>
       <Icon

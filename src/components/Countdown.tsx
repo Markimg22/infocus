@@ -1,62 +1,33 @@
-import React, { useState } from 'react';
-import { View, Text, Vibration, StyleSheet, Dimensions } from 'react-native';
+import { CountdownContext } from 'contexts/CountdownContext';
+import React, { useContext } from 'react';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
-import padToTwo from '../../utils/pad-to-two';
-import TimerButtons from '../TimerButtons';
 
-interface TimerProps {
-  timeTask: number;
-  timeRest: number;
-}
+export function Countdown() {
+  const { minutes, seconds, isPlaying, resetCountdown } = useContext(
+    CountdownContext,
+  );
 
-export default function Timer({ timeRest, timeTask }: TimerProps): JSX.Element {
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [key, setKey] = useState<number>(0);
-  const [timer, setTimer] = useState<number>(timeTask);
-  const [isRest, setIsRest] = useState<boolean>(false);
-
-  const handleTimer = () => {
-    setIsPlaying(!isPlaying);
-  };
-
-  const resetTimer = () => {
-    setKey((prevKey) => prevKey + 1);
-  };
-
-  const changeTimer = () => {
-    Vibration.vibrate(1000, true);
-
-    if (!isRest) {
-      setTimer(timeRest);
-      setIsRest(true);
-    } else {
-      setTimer(timeTask);
-      setIsRest(false);
-    }
-
-    resetTimer();
-  };
+  const [minuteLeft, minuteRight] = String(minutes).padStart(2, '0').split('');
+  const [secondLeft, secondRight] = String(seconds).padStart(2, '0').split('');
 
   return (
     <View style={styles.container}>
       <View>
         <CountdownCircleTimer
-          key={key}
           isPlaying={isPlaying}
           colors="#BB86FC"
           strokeWidth={15}
           size={200}
-          duration={timer * 60}
-          initialRemainingTime={timer * 60}
-          onComplete={changeTimer}>
+          duration={minutes}
+          initialRemainingTime={minutes}
+          onComplete={resetCountdown}>
           {({ remainingTime }) => {
             if (typeof remainingTime !== 'undefined') {
-              const minutes = Math.floor(remainingTime / 60);
-              const seconds = remainingTime % 60;
               return (
                 <View style={styles.timerContainer}>
                   <Text style={styles.timerText}>
-                    {`${padToTwo(minutes)}:${padToTwo(seconds)}`}
+                    {`${minuteLeft}${minuteRight}:${secondLeft}${secondRight}`}
                   </Text>
                   <Text style={styles.timerMsg}>
                     {minutes > 1 ? 'minutos restantes' : 'minuto restante'}
@@ -67,11 +38,6 @@ export default function Timer({ timeRest, timeTask }: TimerProps): JSX.Element {
           }}
         </CountdownCircleTimer>
       </View>
-      <TimerButtons
-        isPlaying={isPlaying}
-        handleTimer={handleTimer}
-        resetTimer={resetTimer}
-      />
     </View>
   );
 }

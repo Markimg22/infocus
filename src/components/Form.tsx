@@ -13,11 +13,7 @@ interface FormProps {
   setNewTask: (text: string) => void;
 }
 
-export default function Form({
-  newTask,
-  addTask,
-  setNewTask,
-}: FormProps): JSX.Element {
+export function Form({ newTask, addTask, setNewTask }: FormProps) {
   return (
     <View style={styles.container}>
       <TextInput

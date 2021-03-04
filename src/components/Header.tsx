@@ -9,12 +9,12 @@ interface HeaderProps extends StackHeaderProps {
   pageNavigation: 'TimerPage' | 'CreateTasksPage';
 }
 
-export default function Header({
+export function Header({
   iconName,
   iconDirection,
   navigation,
   pageNavigation,
-}: HeaderProps): JSX.Element {
+}: HeaderProps) {
   return (
     <View style={styles.container}>
       <Icon

@@ -1,16 +1,13 @@
 import React from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
-import Task from '../Task';
+import { Task } from './Task';
 
 interface ListTasksProps {
   tasks: any;
   removeTask: (text: string) => void;
 }
 
-export default function ListTasks({
-  tasks,
-  removeTask,
-}: ListTasksProps): JSX.Element {
+export function ListTasks({ tasks, removeTask }: ListTasksProps) {
   return (
     <View style={styles.container}>
       <FlatList
