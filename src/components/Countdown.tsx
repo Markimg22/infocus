@@ -43,27 +43,11 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 45,
     fontWeight: 'bold',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
   },
   timerInfoText: {
     textAlign: 'center',
     color: '#fff',
     fontSize: 15,
     fontWeight: 'bold',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
   },
 });

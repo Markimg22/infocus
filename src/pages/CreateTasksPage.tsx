@@ -69,6 +69,7 @@ export function CreateTasksPage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#333238',
   },
   title: {
     textAlign: 'center',
