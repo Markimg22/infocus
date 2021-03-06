@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Estudar ReactJS",
+    "isCompleted": false
+  },
+  {
+    "title": "Estudar ReactNative",
+    "isCompleted": false
+  },
+  {
+    "title": "Estudar NodeJS",
+    "isCompleted": true
+  },
+  {
+    "title": "Estudar HTML5",
+    "isCompleted": false
+  },
+  {
+    "title": "Estudar CSS3",
+    "isCompleted": true
+  },
+  {
+    "title": "Estudar JavaScript",
+    "isCompleted": false
+  },
+  {
+    "title": "Estudar TypeScript",
+    "isCompleted": true
+  },
+  {
+    "title": "Estudar MongoDB",
+    "isCompleted": false
+  }
+]

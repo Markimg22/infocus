@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { TaskContext, Task } from '../contexts/TaskContext';
 
 interface TaskProps {
-  item: string;
-  removeTask: (item: string) => void;
+  item: Task;
 }
 
-export function Task({ item, removeTask }: TaskProps) {
-  const [done, setDone] = useState<boolean>(false);
+export function TaskComponent({ item }: TaskProps) {
+  const { removeTask, checkTask } = useContext(TaskContext);
 
   return (
     <View style={styles.container}>
       <Icon
         style={styles.checkboxIcon}
-        name={done ? 'check-circle' : 'circle'}
-        onPress={() => setDone(!done)}
+        name={item.isCompleted ? 'check-circle' : 'circle'}
+        onPress={() => checkTask(item)}
       />
-      <Text style={done ? styles.taskDoneText : styles.taskNormalText}>
-        {item}
+      <Text
+        style={item.isCompleted ? styles.taskDoneText : styles.taskNormalText}>
+        {item.title}
       </Text>
       <Icon
         style={styles.deleteIcon}

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { CountdownContext } from '../contexts/CountdownContext';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-export function PlayOrPauseButton() {
+export function StartOrPauseButton() {
   const { isPlaying, pauseCountdown, startCountdown } = useContext(
     CountdownContext,
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import {
   View,
   TextInput,
@@ -6,24 +6,27 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
+import { TaskContext } from '../contexts/TaskContext';
 
-interface FormProps {
-  newTask: string;
-  addTask: () => void;
-  setNewTask: (text: string) => void;
-}
+export function Form() {
+  const { createTask } = useContext(TaskContext);
+  const [title, setTile] = useState('');
 
-export function Form({ newTask, addTask, setNewTask }: FormProps) {
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.textInput}
-        value={newTask}
+        value={title}
         placeholder="Insira uma tarefa..."
         maxLength={20}
-        onChangeText={(text) => setNewTask(text)}
+        onChangeText={(text) => setTile(text)}
       />
-      <TouchableOpacity onPress={() => addTask()} style={styles.button}>
+      <TouchableOpacity
+        onPress={() => {
+          createTask(title);
+          setTile('');
+        }}
+        style={styles.button}>
         <Text style={styles.textButton}>+ Adicionar</Text>
       </TouchableOpacity>
     </View>

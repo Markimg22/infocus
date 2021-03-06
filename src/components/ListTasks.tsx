@@ -1,21 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
-import { Task } from './Task';
+import { TaskContext } from '../contexts/TaskContext';
+import { TaskComponent } from './TaskComponent';
 
-interface ListTasksProps {
-  tasks: any;
-  removeTask: (text: string) => void;
-}
+export function ListTasks() {
+  const { tasks } = useContext(TaskContext);
 
-export function ListTasks({ tasks, removeTask }: ListTasksProps) {
   return (
     <View style={styles.container}>
       <FlatList
         data={tasks}
-        keyExtractor={(item) => item.toString()}
+        keyExtractor={(item) => item.title}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => {
-          return <Task item={item} removeTask={removeTask} />;
+          return <TaskComponent item={item} />;
         }}
       />
     </View>

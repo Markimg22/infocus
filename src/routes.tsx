@@ -6,40 +6,41 @@ import { TimerPage } from './pages/TimerPage';
 import { CreateTasksPage } from './pages/CreateTasksPage';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-const { Navigator, Screen } = createMaterialBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 export function Routes() {
   return (
     <NavigationContainer>
-      <Navigator
+      <Tab.Navigator
         initialRouteName="TimerPage"
         barStyle={styles.bottomBar}
-        shifting={true}>
-        <Screen
+        shifting={true}
+        sceneAnimationEnabled={true}>
+        <Tab.Screen
           name="TimerPage"
           component={TimerPage}
           options={{
-            tabBarLabel: 'Timer',
+            tabBarLabel: 'Tempo',
             tabBarIcon: ({ color }) => (
               <View>
-                <Icon size={25} name="clock" color={color} />
+                <Icon size={20} name="clock" color={color} />
               </View>
             ),
           }}
         />
-        <Screen
+        <Tab.Screen
           name="CreateTasksPage"
           component={CreateTasksPage}
           options={{
-            tabBarLabel: 'Tasks',
+            tabBarLabel: 'Tarefas',
             tabBarIcon: ({ color }) => (
               <View>
-                <Icon size={25} name="tasks" color={color} />
+                <Icon size={20} name="tasks" color={color} />
               </View>
             ),
           }}
         />
-      </Navigator>
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
