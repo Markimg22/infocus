@@ -11,7 +11,7 @@ interface TaskContextData {
   tasks: Task[];
   createTask: (title: string) => Task[] | undefined;
   removeTask: (item: Task) => Task[];
-  checkTask: (item: Task) => Task[];
+  checkTask: (item: Task) => void;
 }
 
 interface TaskProps {
@@ -41,9 +41,14 @@ export function TaskProvider({ children }: TaskProps) {
   }
 
   function checkTask(item: Task) {
-    const search = tasks.filter((task) => task.title === item.title);
-    console.log(search);
-    return tasks;
+    setTasks(
+      tasks.filter((task) => {
+        if (task.title === item.title) {
+          task.isCompleted = !task.isCompleted;
+        }
+        return tasks;
+      }),
+    );
   }
 
   return (
