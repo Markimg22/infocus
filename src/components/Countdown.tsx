@@ -40,6 +40,7 @@ export function Countdown() {
 
 const styles = StyleSheet.create({
   timerText: {
+    textAlign: 'center',
     color: '#fff',
     fontSize: 45,
     fontWeight: 'bold',

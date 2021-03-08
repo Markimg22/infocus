@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { CountdownProvider } from '../contexts/CountdownContext';
 import { Countdown } from '../components/Countdown';
 import { StartOrPauseButton } from '../components/StartOrPauseButton';
 import { ResetButton } from '../components/ResetButton';
+import { TaskComponent } from '../components/TaskComponent';
+import { CountdownProvider } from '../contexts/CountdownContext';
+import { TaskContext } from '../contexts/TaskContext';
 
 export function TimerPage() {
+  const { tasks } = useContext(TaskContext);
+
   return (
     <CountdownProvider>
       <View style={styles.container}>
+        {tasks.map((task) => {
+          if (!task.isCompleted) {
+            return <TaskComponent item={task} />;
+          }
+        })}
         <Countdown />
         <View style={styles.buttonsContainer}>
           <StartOrPauseButton />

@@ -2,21 +2,18 @@ import React from 'react';
 import { KeyboardAvoidingView, Platform, StyleSheet, Text } from 'react-native';
 import { ListTasks } from '../components/ListTasks';
 import { Form } from '../components/Form';
-import { TaskProvider } from 'contexts/TaskContext';
 
 export function CreateTasksPage() {
   return (
-    <TaskProvider>
-      <KeyboardAvoidingView
-        keyboardVerticalOffset={0}
-        behavior="padding"
-        style={styles.container}
-        enabled={Platform.OS === 'ios'}>
-        <Text style={styles.title}>Organize as suas tarefas</Text>
-        <ListTasks />
-        <Form />
-      </KeyboardAvoidingView>
-    </TaskProvider>
+    <KeyboardAvoidingView
+      keyboardVerticalOffset={0}
+      behavior="padding"
+      style={styles.container}
+      enabled={Platform.OS === 'ios'}>
+      <Text style={styles.title}>Organize as suas tarefas</Text>
+      <ListTasks />
+      <Form />
+    </KeyboardAvoidingView>
   );
 }
 
