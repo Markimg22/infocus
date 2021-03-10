@@ -5,19 +5,24 @@ import { StartOrPauseButton } from '../components/StartOrPauseButton';
 import { ResetButton } from '../components/ResetButton';
 import { TaskComponent } from '../components/TaskComponent';
 import { CountdownProvider } from '../contexts/CountdownContext';
-import { TaskContext } from '../contexts/TaskContext';
+import { TaskContext, Task } from '../contexts/TaskContext';
 
 export function TimerPage() {
   const { tasks } = useContext(TaskContext);
 
+  let tasksNotCompleted: Task[] = [];
+
   return (
     <CountdownProvider>
       <View style={styles.container}>
-        {tasks.map((task) => {
+        {tasks.forEach((task) => {
           if (!task.isCompleted) {
-            return <TaskComponent item={task} />;
+            tasksNotCompleted.push(task);
           }
         })}
+        {tasksNotCompleted.length > 0 && (
+          <TaskComponent item={tasksNotCompleted[0]} />
+        )}
         <Countdown />
         <View style={styles.buttonsContainer}>
           <StartOrPauseButton />
