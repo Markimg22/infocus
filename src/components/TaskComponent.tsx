@@ -23,7 +23,7 @@ export function TaskComponent({ item }: TaskProps) {
       </Text>
       <Icon
         style={styles.deleteIcon}
-        name="minus-circle"
+        name="times-circle"
         onPress={() => removeTask(item)}
       />
     </View>
@@ -59,6 +59,6 @@ const styles = StyleSheet.create({
   },
   deleteIcon: {
     color: '#FF5757',
-    fontSize: 25,
+    fontSize: 30,
   },
 });
