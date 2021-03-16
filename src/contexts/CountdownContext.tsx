@@ -4,8 +4,9 @@ interface CountdownContextData {
   time: number;
   minutes: number;
   seconds: number;
-  hasFinished: boolean;
-  isPlaying: boolean;
+  countdownIsPlaying: boolean;
+  key: number;
+  changeCountdown: () => void;
   startCountdown: () => void;
   pauseCountdown: () => void;
   resetCountdown: () => void;
@@ -19,39 +20,50 @@ export const CountdownContext = createContext({} as CountdownContextData);
 
 let countdownTimeout: NodeJS.Timeout;
 
+const restingTime = 5 * 60;
+const workingTime = 25 * 60;
+
 export function CountdownProvider({ children }: CountdownProviderProps) {
-  const [time, setTime] = useState(25 * 60);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [hasFinished, setHasFinished] = useState(false);
+  const [time, setTime] = useState(workingTime);
+  const [countdownIsPlaying, setCountdownIsPlaying] = useState(false);
+  const [isResting, setIsResting] = useState(false);
+  const [key, setKey] = useState(0);
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
 
   function startCountdown() {
-    setIsPlaying(true);
+    setCountdownIsPlaying(true);
   }
 
   function pauseCountdown() {
-    setIsPlaying(false);
+    setCountdownIsPlaying(false);
   }
 
   function resetCountdown() {
     clearTimeout(countdownTimeout);
-    setIsPlaying(false);
-    setTime(25 * 60);
-    setHasFinished(false);
+    setTime(isResting ? restingTime : workingTime);
+    setKey((prevKey) => prevKey + 1);
   }
 
+  function changeCountdown() {
+    setIsResting(!isResting);
+  }
+
+  // Change Time
   useEffect(() => {
-    if (isPlaying && time > 0) {
+    setTime(isResting ? restingTime : workingTime);
+    setKey((prevKey) => prevKey + 1);
+  }, [isResting]);
+
+  // Countdown
+  useEffect(() => {
+    if (countdownIsPlaying && time > 0) {
       countdownTimeout = setTimeout(() => {
         setTime(time - 1);
       }, 1000);
-    } else if (isPlaying && time === 0) {
-      setHasFinished(true);
-      setIsPlaying(false);
     }
-  }, [isPlaying, time]);
+  }, [countdownIsPlaying, time]);
 
   return (
     <CountdownContext.Provider
@@ -59,8 +71,9 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
         time,
         minutes,
         seconds,
-        hasFinished,
-        isPlaying,
+        countdownIsPlaying,
+        key,
+        changeCountdown,
         startCountdown,
         pauseCountdown,
         resetCountdown,

@@ -3,16 +3,16 @@ import { CountdownContext } from '../contexts/CountdownContext';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 export function StartOrPauseButton() {
-  const { isPlaying, pauseCountdown, startCountdown } = useContext(
+  const { countdownIsPlaying, pauseCountdown, startCountdown } = useContext(
     CountdownContext,
   );
 
   return (
     <Icon
-      name={isPlaying ? 'pause-circle' : 'play-circle'}
-      color={isPlaying ? '#CFD8DC' : '#fff'}
+      name={countdownIsPlaying ? 'pause-circle' : 'play-circle'}
+      color={countdownIsPlaying ? '#CFD8DC' : '#fff'}
       size={120}
-      onPress={isPlaying ? pauseCountdown : startCountdown}
+      onPress={countdownIsPlaying ? pauseCountdown : startCountdown}
     />
   );
 }

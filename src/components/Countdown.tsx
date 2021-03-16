@@ -4,22 +4,28 @@ import { CountdownContext } from 'contexts/CountdownContext';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
 export function Countdown() {
-  const { time, minutes, seconds, isPlaying, resetCountdown } = useContext(
-    CountdownContext,
-  );
+  const {
+    time,
+    minutes,
+    seconds,
+    countdownIsPlaying,
+    key,
+    changeCountdown,
+  } = useContext(CountdownContext);
 
   const [minuteLeft, minuteRight] = String(minutes).padStart(2, '0').split('');
   const [secondLeft, secondRight] = String(seconds).padStart(2, '0').split('');
 
   return (
     <CountdownCircleTimer
-      isPlaying={isPlaying}
+      key={key}
+      isPlaying={countdownIsPlaying}
       colors="#BB86FC"
       strokeWidth={15}
       size={200}
       duration={time}
       initialRemainingTime={time}
-      onComplete={resetCountdown}>
+      onComplete={changeCountdown}>
       {({ remainingTime }) => {
         if (typeof remainingTime !== 'undefined') {
           return (
