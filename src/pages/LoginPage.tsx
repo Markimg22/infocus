@@ -4,25 +4,34 @@ import { Input } from '../components/Input';
 import { Button } from '../components/Button';
 import { Google, Facebook } from '../assets/svg/icon';
 
-export function LoginPage() {
+export function LoginPage({ navigation }: any) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
         Entre na sua conta para ter acesso as suas tarefas e desempenho.
       </Text>
+
       <View style={styles.form}>
-        <Input placeholder="Insira seu nome" />
-        <Input placeholder="Insira sua senha" />
+        <Input textContentType="username" placeholder="Insira seu nome" />
+        <Input
+          textContentType="password"
+          placeholder="Insira sua senha"
+          secureTextEntry={true}
+        />
         <Button text="Entrar" />
-        <TouchableOpacity style={styles.notAccountContainer}>
+        <TouchableOpacity
+          style={styles.notAccountContainer}
+          onPress={() => navigation.navigate('RegisterPage')}>
           <Text style={styles.notAccountText}>Não tenho uma conta</Text>
         </TouchableOpacity>
       </View>
+
       <View style={styles.orContainer}>
         <View style={styles.line} />
         <Text style={styles.text}>Ou</Text>
         <View style={styles.line} />
       </View>
+
       <View style={styles.logginWithContainer}>
         <Text style={styles.text}>Entre com:</Text>
         <View style={styles.imagesContainer}>
