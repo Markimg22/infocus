@@ -21,7 +21,9 @@ export function CreateTasksPage() {
       behavior="padding"
       style={styles.container}
       enabled={Platform.OS === 'ios'}>
-      <Text style={styles.title}>Organize as suas tarefas</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>Organize as suas tarefas</Text>
+      </View>
       <ListTasks />
       <View style={styles.form}>
         <Input
@@ -55,9 +57,13 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'center',
-    marginTop: 20,
-    fontSize: 39,
+    marginTop: 30,
+    fontSize: 30,
     color: '#fff',
     fontWeight: 'bold',
+  },
+  titleContainer: {
+    width: '60%',
+    alignSelf: 'center',
   },
 });

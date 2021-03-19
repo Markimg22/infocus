@@ -28,45 +28,43 @@ export function Routes() {
   );
 }
 
-function BottomBar() {
-  return (
-    <Tab.Navigator
-      initialRouteName="TimerPage"
-      barStyle={styles.bottomBar}
-      shifting={true}>
-      <Tab.Screen
-        name={isLogged ? 'ProfilePage' : 'LoginPage'}
-        component={isLogged ? ProfilePage : LoginPage}
-        options={{
-          tabBarLabel: 'Conta',
-          tabBarIcon: ({ color }) => (
-            <Icon size={20} name="user" color={color} solid />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="TimerPage"
-        component={TimerPage}
-        options={{
-          tabBarLabel: 'Tempo',
-          tabBarIcon: ({ color }) => (
-            <Icon size={20} name="clock" color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="CreateTasksPage"
-        component={CreateTasksPage}
-        options={{
-          tabBarLabel: 'Tarefas',
-          tabBarIcon: ({ color }) => (
-            <Icon size={20} name="tasks" color={color} />
-          ),
-        }}
-      />
-    </Tab.Navigator>
-  );
-}
+const BottomBar = () => (
+  <Tab.Navigator
+    initialRouteName="TimerPage"
+    barStyle={styles.bottomBar}
+    shifting={true}>
+    <Tab.Screen
+      name={isLogged ? 'ProfilePage' : 'LoginPage'}
+      component={isLogged ? ProfilePage : LoginPage}
+      options={{
+        tabBarLabel: 'Conta',
+        tabBarIcon: ({ color }) => (
+          <Icon size={20} name="user" color={color} solid />
+        ),
+      }}
+    />
+    <Tab.Screen
+      name="TimerPage"
+      component={TimerPage}
+      options={{
+        tabBarLabel: 'Tempo',
+        tabBarIcon: ({ color }) => (
+          <Icon size={20} name="clock" color={color} />
+        ),
+      }}
+    />
+    <Tab.Screen
+      name="CreateTasksPage"
+      component={CreateTasksPage}
+      options={{
+        tabBarLabel: 'Tarefas',
+        tabBarIcon: ({ color }) => (
+          <Icon size={20} name="tasks" color={color} />
+        ),
+      }}
+    />
+  </Tab.Navigator>
+);
 
 const styles = StyleSheet.create({
   bottomBar: {

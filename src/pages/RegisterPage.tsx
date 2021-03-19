@@ -11,7 +11,7 @@ export function RegisterPage({ navigation }: any) {
         qualquer dispositivo.
       </Text>
       <View style={styles.form}>
-        <Input textContentType="username" placeholder="Insira seu nome" />
+        <Input placeholder="Insira seu e-mail ou nome" />
         <Input
           textContentType="password"
           placeholder="Insira sua senha"
@@ -26,7 +26,7 @@ export function RegisterPage({ navigation }: any) {
         <TouchableOpacity
           style={styles.accountContainer}
           onPress={() => navigation.navigate('LoginPage')}>
-          <Text style={styles.accountText}>Não tenho uma conta</Text>
+          <Text style={styles.accountText}>Eu tenho uma conta</Text>
         </TouchableOpacity>
       </View>
     </View>

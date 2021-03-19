@@ -12,7 +12,7 @@ export function LoginPage({ navigation }: any) {
       </Text>
 
       <View style={styles.form}>
-        <Input textContentType="username" placeholder="Insira seu nome" />
+        <Input placeholder="Insira seu e-mail ou nome" />
         <Input
           textContentType="password"
           placeholder="Insira sua senha"
