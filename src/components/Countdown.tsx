@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { CountdownContext } from 'contexts/CountdownContext';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
+
+import { CountdownContext } from 'contexts/CountdownContext';
 
 export function Countdown() {
   const {

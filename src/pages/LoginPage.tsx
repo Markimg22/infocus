@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
+
 import { Google, Facebook } from '../assets/svg/icon';
 
 export function LoginPage({ navigation }: any) {

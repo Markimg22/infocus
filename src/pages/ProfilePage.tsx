@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+
 import { Profile } from '../components/Profile';
 import { UserPerformance } from '../components/UserPerformance';
 

@@ -1,18 +1,22 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
 import { TimerPage } from './pages/TimerPage';
 import { CreateTasksPage } from './pages/CreateTasksPage';
 import { LoginPage } from './pages/LoginPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { RegisterPage } from './pages/RegisterPage';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
-let isLogged = false;
+
+let isLogged = true;
 
 export function Routes() {
   return (

@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
+
 import { TaskContext } from '../contexts/TaskContext';
+
 import { TaskComponent } from './TaskComponent';
 
 export function ListTasks() {

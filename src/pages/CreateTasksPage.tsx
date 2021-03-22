@@ -6,10 +6,12 @@ import {
   Text,
   View,
 } from 'react-native';
+
+import { TaskContext } from '../contexts/TaskContext';
+
 import { ListTasks } from '../components/ListTasks';
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
-import { TaskContext } from '../contexts/TaskContext';
 
 export function CreateTasksPage() {
   const { createTask } = useContext(TaskContext);
