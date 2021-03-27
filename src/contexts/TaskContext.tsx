@@ -1,8 +1,6 @@
 import React, { createContext, useState, ReactNode } from 'react';
 import { Alert } from 'react-native';
 
-import listTasks from '../../tasks-test.json';
-
 export interface Task {
   title: string;
   isCompleted: boolean;
@@ -22,7 +20,7 @@ interface TaskProps {
 export const TaskContext = createContext({} as TaskContextData);
 
 export function TaskProvider({ children }: TaskProps) {
-  const [tasks, setTasks] = useState<Task[]>(listTasks);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   function createTask(title: string) {
     const search = tasks.filter((task) => task.title === title);

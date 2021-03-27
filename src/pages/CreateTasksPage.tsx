@@ -15,7 +15,7 @@ import { Button } from '../components/Button';
 
 export function CreateTasksPage() {
   const { createTask } = useContext(TaskContext);
-  const [title, setTile] = useState('');
+  const [title, setTitle] = useState('');
 
   return (
     <KeyboardAvoidingView
@@ -32,13 +32,13 @@ export function CreateTasksPage() {
           value={title}
           placeholder="Insira uma tarefa"
           maxLength={20}
-          onChangeText={(text) => setTile(text)}
+          onChangeText={(text) => setTitle(text)}
         />
         <Button
           text="Adicionar"
           onPress={() => {
             createTask(title);
-            setTile('');
+            setTitle('');
           }}
         />
       </View>
