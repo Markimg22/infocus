@@ -22,6 +22,17 @@ export const TaskContext = createContext({} as TaskContextData);
 export function TaskProvider({ children }: TaskProps) {
   const [tasks, setTasks] = useState<Task[]>([]);
 
+  async function getContent() {
+    try {
+      const response = await fetch('http://localhost:3333');
+      console.log(response);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  getContent();
+
   function createTask(title: string) {
     const search = tasks.filter((task) => task.title === title);
 
