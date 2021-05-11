@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { Input } from '../components/Input';
@@ -6,7 +6,14 @@ import { Button } from '../components/Button';
 
 import { Google, Facebook } from '../assets/svg/icon';
 
+import { AuthContext } from '../contexts/AuthContext';
+
 export function LoginPage({ navigation }: any) {
+  const [email, setEmail] = useState('user2@hotmail.com');
+  const [password, setPassword] = useState('123');
+
+  const { errorMessage, signIn } = useContext(AuthContext);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
@@ -14,13 +21,24 @@ export function LoginPage({ navigation }: any) {
       </Text>
 
       <View style={styles.form}>
-        <Input placeholder="Insira seu e-mail ou nome" />
+        <Input
+          placeholder="Insira seu e-mail"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+        />
         <Input
           textContentType="password"
           placeholder="Insira sua senha"
           secureTextEntry={true}
+          value={password}
+          onChangeText={(text) => setPassword(text)}
         />
-        <Button text="Entrar" />
+        {!!errorMessage && (
+          <View style={styles.errorMessageContainer}>
+            <Text style={styles.errorMessage}>{errorMessage}</Text>
+          </View>
+        )}
+        <Button text="Entrar" onPress={() => signIn(email, password)} />
         <TouchableOpacity
           style={styles.notAccountContainer}
           onPress={() => navigation.navigate('RegisterPage')}>
@@ -50,6 +68,18 @@ export function LoginPage({ navigation }: any) {
 }
 
 const styles = StyleSheet.create({
+  errorMessageContainer: {
+    backgroundColor: '#ccc',
+    width: '100%',
+    padding: 10,
+    borderRadius: 10,
+    marginBottom: 14,
+  },
+  errorMessage: {
+    color: '#ec2027',
+    fontSize: 16,
+    textAlign: 'center',
+  },
   logginWithContainer: {
     alignSelf: 'center',
     marginTop: 20,
