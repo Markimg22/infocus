@@ -12,15 +12,17 @@ interface TaskProps {
 }
 
 export function TaskComponent({ item }: TaskProps) {
-  const { removeTask } = useContext(AuthContext);
-  const { checkTask } = useContext(TaskContext);
+  const { removeTask, updateTask, loggedInUser } = useContext(AuthContext);
+  const { removeLocalTask, updateLocalTask } = useContext(TaskContext);
 
   return (
     <View style={styles.container}>
       <Icon
         style={styles.checkboxIcon}
         name={item.is_completed ? 'check-circle' : 'circle'}
-        onPress={() => checkTask(item)}
+        onPress={() =>
+          loggedInUser && item.id ? updateTask(item.id) : updateLocalTask(item)
+        }
       />
       <Text
         style={item.is_completed ? styles.taskDoneText : styles.taskNormalText}>
@@ -29,7 +31,9 @@ export function TaskComponent({ item }: TaskProps) {
       <Icon
         style={styles.deleteIcon}
         name="times-circle"
-        onPress={() => removeTask(item.id)}
+        onPress={() =>
+          loggedInUser && item.id ? removeTask(item.id) : removeLocalTask(item)
+        }
       />
     </View>
   );

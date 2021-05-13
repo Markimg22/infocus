@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 
-// import { TaskContext } from '../contexts/TaskContext';
+import { TaskContext } from '../contexts/TaskContext';
 import { AuthContext } from '../contexts/AuthContext';
 
 import { ListTasks } from '../components/ListTasks';
@@ -17,8 +17,8 @@ import { Button } from '../components/Button';
 export function CreateTasksPage() {
   const [title, setTitle] = useState('');
 
-  // const { createTask } = useContext(TaskContext);
-  const { createTask } = useContext(AuthContext);
+  const { createLocalTask } = useContext(TaskContext);
+  const { createTask, loggedInUser } = useContext(AuthContext);
 
   return (
     <KeyboardAvoidingView
@@ -40,7 +40,11 @@ export function CreateTasksPage() {
         <Button
           text="Adicionar"
           onPress={() => {
-            createTask(title);
+            if (loggedInUser) {
+              createTask(title);
+            } else {
+              createLocalTask(title);
+            }
             setTitle('');
           }}
         />

@@ -1,20 +1,20 @@
 import React, { useContext } from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
 
-// import { TaskContext } from '../contexts/TaskContext';
+import { TaskContext } from '../contexts/TaskContext';
 import { AuthContext } from '../contexts/AuthContext';
 
 import { TaskComponent } from './TaskComponent';
 
 export function ListTasks() {
-  // const { tasks } = useContext(TaskContext);
-  const { tasks } = useContext(AuthContext);
+  const { locaTasks } = useContext(TaskContext);
+  const { tasks, loggedInUser } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={tasks}
-        keyExtractor={(item) => item.id}
+        data={loggedInUser ? tasks : locaTasks}
+        keyExtractor={(_, index) => String(index)}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => {
           return <TaskComponent item={item} />;

@@ -4,10 +4,10 @@ import { Alert } from 'react-native';
 import { Task } from '../types/Task';
 
 interface TaskContextData {
-  tasks: Task[];
-  createTask: (title: string) => Task[] | undefined;
-  removeTask: (item: Task) => Task[];
-  checkTask: (item: Task) => void;
+  locaTasks: Task[];
+  createLocalTask: (title: string) => Task[] | undefined;
+  removeLocalTask: (item: Task) => Task[];
+  updateLocalTask: (item: Task) => void;
 }
 
 interface TaskProps {
@@ -17,30 +17,33 @@ interface TaskProps {
 export const TaskContext = createContext({} as TaskContextData);
 
 export function TaskProvider({ children }: TaskProps) {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [locaTasks, setLocalTasks] = useState<Task[]>([]);
 
-  const createTask = (title: string) => {
-    const search = tasks.filter((task) => task.title === title);
+  const createLocalTask = (title: string) => {
+    const search = locaTasks.filter((task) => task.title === title);
+
     if (search.length !== 0) {
       Alert.alert('Atenção!', 'Nome da tarefa repetido, tente outro.');
       return;
     }
-    setTasks([...tasks, { title, is_completed: false }]);
-    return tasks;
+
+    setLocalTasks([...locaTasks, { title, is_completed: false }]);
+    return locaTasks;
   };
 
-  const removeTask = (item: Task) => {
-    setTasks(tasks.filter((task) => task !== item));
-    return tasks;
+  const removeLocalTask = (item: Task) => {
+    setLocalTasks(locaTasks.filter((task) => task !== item));
+    return locaTasks;
   };
 
-  const checkTask = (item: Task) => {
-    setTasks(
-      tasks.filter((task) => {
+  const updateLocalTask = (item: Task) => {
+    setLocalTasks(
+      locaTasks.filter((task) => {
         if (task.title === item.title) {
           task.is_completed = !task.is_completed;
         }
-        return tasks;
+
+        return locaTasks;
       }),
     );
   };
@@ -48,10 +51,10 @@ export function TaskProvider({ children }: TaskProps) {
   return (
     <TaskContext.Provider
       value={{
-        tasks,
-        createTask,
-        removeTask,
-        checkTask,
+        locaTasks,
+        createLocalTask,
+        removeLocalTask,
+        updateLocalTask,
       }}>
       {children}
     </TaskContext.Provider>

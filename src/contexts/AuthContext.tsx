@@ -17,6 +17,7 @@ interface AuthContextData {
   tasks: Task[];
   createTask: (title: string) => Promise<void>;
   removeTask: (id: string) => Promise<void>;
+  updateTask: (id: string) => Promise<void>;
   register: (
     email: string,
     password: string,
@@ -76,8 +77,17 @@ export function AuthProvider({ children }: AuthProps) {
 
   const removeTask = async (id: string) => {
     try {
-      await api.delete('/tasks', { id });
-      // setTasks(tasks.data as Task[]);
+      const response = await api.delete(`/tasks/${id}`);
+      setTasks(response.data as Task[]);
+    } catch (response) {
+      console.error(response.data.errors);
+    }
+  };
+
+  const updateTask = async (id: string) => {
+    try {
+      const response = await api.put(`/tasks/${id}`);
+      setTasks(response.data as Task[]);
     } catch (response) {
       console.error(response.data.errors);
     }
@@ -131,6 +141,7 @@ export function AuthProvider({ children }: AuthProps) {
         tasks,
         createTask,
         removeTask,
+        updateTask,
         register,
         signIn,
         signOut,
