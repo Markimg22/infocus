@@ -18,6 +18,10 @@ export function RegisterPage({ navigation }: any) {
 
   const { register, errorMessage } = useContext(AuthContext);
 
+  const showModal = (value: boolean) => {
+    setShowTermOfUse(value);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
@@ -54,7 +58,7 @@ export function RegisterPage({ navigation }: any) {
               false: '#fff',
             }}
           />
-          <TouchableOpacity onPress={() => setShowTermOfUse(!showTermOfUse)}>
+          <TouchableOpacity onPress={() => showModal(true)}>
             <Text
               style={[
                 styles.termText,
@@ -64,7 +68,7 @@ export function RegisterPage({ navigation }: any) {
             </Text>
           </TouchableOpacity>
         </View>
-        <TermOfUse visible={showTermOfUse} />
+        <TermOfUse visible={showTermOfUse} showModal={showModal} />
         {!!errorMessage && (
           <View style={styles.errorMessageContainer}>
             <Text style={styles.errorMessage}>{errorMessage}</Text>
