@@ -7,10 +7,14 @@ import { ResetButton } from '../components/ResetButton';
 import { TaskComponent } from '../components/TaskComponent';
 
 import { CountdownProvider } from '../contexts/CountdownContext';
-import { TaskContext, Task } from '../contexts/TaskContext';
+// import { TaskContext } from '../contexts/TaskContext';
+import { AuthContext } from '../contexts/AuthContext';
+
+import { Task } from '../types/Task';
 
 export function TimerPage() {
-  const { tasks } = useContext(TaskContext);
+  // const { tasks } = useContext(TaskContext);
+  const { tasks } = useContext(AuthContext);
 
   let tasksNotCompleted: Task[] = [];
 
@@ -18,7 +22,7 @@ export function TimerPage() {
     <CountdownProvider>
       <View style={styles.container}>
         {tasks.forEach((task) => {
-          if (!task.isCompleted) {
+          if (!task.is_completed) {
             tasksNotCompleted.push(task);
           }
         })}

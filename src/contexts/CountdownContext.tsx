@@ -18,7 +18,7 @@ interface CountdownProviderProps {
 
 export const CountdownContext = createContext({} as CountdownContextData);
 
-let countdownTimeout: NodeJS.Timeout;
+let countdownTimeout: number;
 
 const restingTime = 0.1 * 60;
 const workingTime = 0.2 * 60;

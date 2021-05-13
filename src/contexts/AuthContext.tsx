@@ -3,11 +3,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import api from '../services/api';
 
-export interface User {
-  id: string;
-  email: string;
-  created_at: string;
-}
+import { User } from '../types/User';
+import { Task } from '../types/Task';
 
 interface ResponseData {
   user: User;
@@ -16,8 +13,10 @@ interface ResponseData {
 
 interface AuthContextData {
   loggedInUser: User | null;
-  // token: string;
   errorMessage: string;
+  tasks: Task[];
+  createTask: (title: string) => Promise<void>;
+  removeTask: (id: string) => Promise<void>;
   register: (
     email: string,
     password: string,
@@ -25,6 +24,7 @@ interface AuthContextData {
   ) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
+  clearErrors: () => void;
 }
 
 interface AuthProps {
@@ -36,6 +36,7 @@ export const AuthContext = createContext({} as AuthContextData);
 export function AuthProvider({ children }: AuthProps) {
   const [errorMessage, setErrorMessage] = useState('');
   const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
     async function loadStorageData() {
@@ -44,11 +45,43 @@ export function AuthProvider({ children }: AuthProps) {
 
       if (storageUser && storageToken) {
         setLoggedInUser(JSON.parse(storageUser));
+        getTasksDatabase();
       }
     }
 
     loadStorageData();
-  });
+  }, []);
+
+  const clearErrors = () => {
+    setErrorMessage('');
+  };
+
+  const getTasksDatabase = async () => {
+    try {
+      const response = await api.get('/tasks');
+      setTasks(response.data as Task[]);
+    } catch (response) {
+      console.error(response.data.errors);
+    }
+  };
+
+  const createTask = async (title: string) => {
+    try {
+      const response = await api.post('/tasks', { title });
+      setTasks([...tasks, response.data as Task]);
+    } catch (response) {
+      console.error(response.data.errors);
+    }
+  };
+
+  const removeTask = async (id: string) => {
+    try {
+      await api.delete('/tasks', { id });
+      // setTasks(tasks.data as Task[]);
+    } catch (response) {
+      console.error(response.data.errors);
+    }
+  };
 
   const register = async (
     email: string,
@@ -59,7 +92,7 @@ export function AuthProvider({ children }: AuthProps) {
       await api.post('/register', { email, password, passwordAgain });
       await signIn(email, password);
 
-      setErrorMessage('');
+      clearErrors();
     } catch (response) {
       setErrorMessage(response.data.errors);
     }
@@ -75,8 +108,10 @@ export function AuthProvider({ children }: AuthProps) {
         ['@InfocusApp:user', JSON.stringify(user)],
       ]);
 
+      await getTasksDatabase();
+
       setLoggedInUser(user);
-      setErrorMessage('');
+      clearErrors();
     } catch (response) {
       setErrorMessage(response.data.errors);
     }
@@ -85,6 +120,7 @@ export function AuthProvider({ children }: AuthProps) {
   const signOut = async () => {
     await AsyncStorage.clear();
     setLoggedInUser(null);
+    setTasks([]);
   };
 
   return (
@@ -92,9 +128,13 @@ export function AuthProvider({ children }: AuthProps) {
       value={{
         loggedInUser,
         errorMessage,
+        tasks,
+        createTask,
+        removeTask,
         register,
         signIn,
         signOut,
+        clearErrors,
       }}>
       {children}
     </AuthContext.Provider>

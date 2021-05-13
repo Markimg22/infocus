@@ -1,10 +1,7 @@
 import React, { createContext, useState, ReactNode } from 'react';
 import { Alert } from 'react-native';
 
-export interface Task {
-  title: string;
-  isCompleted: boolean;
-}
+import { Task } from '../types/Task';
 
 interface TaskContextData {
   tasks: Task[];
@@ -22,33 +19,31 @@ export const TaskContext = createContext({} as TaskContextData);
 export function TaskProvider({ children }: TaskProps) {
   const [tasks, setTasks] = useState<Task[]>([]);
 
-  function createTask(title: string) {
+  const createTask = (title: string) => {
     const search = tasks.filter((task) => task.title === title);
-
     if (search.length !== 0) {
-      Alert.alert('Atenção', 'Nome da tarefa repetido');
+      Alert.alert('Atenção!', 'Nome da tarefa repetido, tente outro.');
       return;
     }
-
-    setTasks([...tasks, { title, isCompleted: false }]);
+    setTasks([...tasks, { title, is_completed: false }]);
     return tasks;
-  }
+  };
 
-  function removeTask(item: Task) {
+  const removeTask = (item: Task) => {
     setTasks(tasks.filter((task) => task !== item));
     return tasks;
-  }
+  };
 
-  function checkTask(item: Task) {
+  const checkTask = (item: Task) => {
     setTasks(
       tasks.filter((task) => {
         if (task.title === item.title) {
-          task.isCompleted = !task.isCompleted;
+          task.is_completed = !task.is_completed;
         }
         return tasks;
       }),
     );
-  }
+  };
 
   return (
     <TaskContext.Provider

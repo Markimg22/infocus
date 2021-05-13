@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState, useContext } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 
 import { Input } from '../components/Input';
@@ -16,7 +16,7 @@ export function RegisterPage({ navigation }: any) {
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [showTermOfUse, setShowTermOfUse] = useState(false);
 
-  const { register, errorMessage } = useContext(AuthContext);
+  const { register, errorMessage, clearErrors } = useContext(AuthContext);
 
   const showModal = (value: boolean) => {
     setShowTermOfUse(value);
@@ -76,11 +76,23 @@ export function RegisterPage({ navigation }: any) {
         )}
         <Button
           text="Cadastrar"
-          onPress={() => register(email, password, passwordAgain)}
+          onPress={() => {
+            if (acceptedTerms) {
+              register(email, password, passwordAgain);
+            } else {
+              Alert.alert(
+                'Aceitar Termos de Uso!',
+                'Você deve aceitar os Termos de Uso para se registrar.',
+              );
+            }
+          }}
         />
         <TouchableOpacity
           style={styles.accountContainer}
-          onPress={() => navigation.navigate('LoginPage')}>
+          onPress={() => {
+            clearErrors();
+            navigation.navigate('LoginPage');
+          }}>
           <Text style={styles.accountText}>Eu tenho uma conta</Text>
         </TouchableOpacity>
       </View>

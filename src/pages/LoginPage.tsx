@@ -9,10 +9,10 @@ import { Google, Facebook } from '../assets/svg/icon';
 import { AuthContext } from '../contexts/AuthContext';
 
 export function LoginPage({ navigation }: any) {
-  const [email, setEmail] = useState('user2@hotmail.com');
+  const [email, setEmail] = useState('user3@hotmail.com');
   const [password, setPassword] = useState('123');
 
-  const { errorMessage, signIn } = useContext(AuthContext);
+  const { errorMessage, signIn, clearErrors } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
@@ -41,7 +41,10 @@ export function LoginPage({ navigation }: any) {
         <Button text="Entrar" onPress={() => signIn(email, password)} />
         <TouchableOpacity
           style={styles.notAccountContainer}
-          onPress={() => navigation.navigate('RegisterPage')}>
+          onPress={() => {
+            clearErrors();
+            navigation.navigate('RegisterPage');
+          }}>
           <Text style={styles.notAccountText}>Não tenho uma conta</Text>
         </TouchableOpacity>
       </View>

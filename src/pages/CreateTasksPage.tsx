@@ -7,15 +7,18 @@ import {
   View,
 } from 'react-native';
 
-import { TaskContext } from '../contexts/TaskContext';
+// import { TaskContext } from '../contexts/TaskContext';
+import { AuthContext } from '../contexts/AuthContext';
 
 import { ListTasks } from '../components/ListTasks';
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
 
 export function CreateTasksPage() {
-  const { createTask } = useContext(TaskContext);
   const [title, setTitle] = useState('');
+
+  // const { createTask } = useContext(TaskContext);
+  const { createTask } = useContext(AuthContext);
 
   return (
     <KeyboardAvoidingView
