@@ -1,6 +1,6 @@
 export interface Task {
-  id?: string;
+  _id?: string;
   title: string;
-  is_completed: boolean;
-  created_at?: Date;
+  isCompleted: boolean;
+  createdAt?: Date;
 }

@@ -18,7 +18,8 @@ export function CreateTasksPage() {
   const [title, setTitle] = useState('');
 
   const { createLocalTask } = useContext(TaskContext);
-  const { createTask, loggedInUser } = useContext(AuthContext);
+  const { createTask, loggedInUser, errorMessage, clearErrors } =
+    useContext(AuthContext);
 
   return (
     <KeyboardAvoidingView
@@ -37,6 +38,11 @@ export function CreateTasksPage() {
           maxLength={20}
           onChangeText={(text) => setTitle(text)}
         />
+        {!!errorMessage && (
+          <View style={styles.errorMessageContainer}>
+            <Text style={styles.errorMessage}>{errorMessage}</Text>
+          </View>
+        )}
         <Button
           text="Adicionar"
           onPress={() => {
@@ -45,6 +51,8 @@ export function CreateTasksPage() {
             } else {
               createLocalTask(title);
             }
+
+            clearErrors();
             setTitle('');
           }}
         />
@@ -54,6 +62,18 @@ export function CreateTasksPage() {
 }
 
 const styles = StyleSheet.create({
+  errorMessageContainer: {
+    backgroundColor: '#ccc',
+    width: '100%',
+    padding: 10,
+    borderRadius: 10,
+    marginBottom: 14,
+  },
+  errorMessage: {
+    color: '#ec2027',
+    fontSize: 16,
+    textAlign: 'center',
+  },
   container: {
     flex: 1,
     backgroundColor: '#333238',

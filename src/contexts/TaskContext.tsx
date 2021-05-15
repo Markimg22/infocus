@@ -22,12 +22,17 @@ export function TaskProvider({ children }: TaskProps) {
   const createLocalTask = (title: string) => {
     const search = locaTasks.filter((task) => task.title === title);
 
+    if (title === '') {
+      Alert.alert('Atenção', 'Insira um título para sua atividade.');
+      return;
+    }
+
     if (search.length !== 0) {
       Alert.alert('Atenção!', 'Nome da tarefa repetido, tente outro.');
       return;
     }
 
-    setLocalTasks([...locaTasks, { title, is_completed: false }]);
+    setLocalTasks([...locaTasks, { title, isCompleted: false }]);
     return locaTasks;
   };
 
@@ -40,7 +45,7 @@ export function TaskProvider({ children }: TaskProps) {
     setLocalTasks(
       locaTasks.filter((task) => {
         if (task.title === item.title) {
-          task.is_completed = !task.is_completed;
+          task.isCompleted = !task.isCompleted;
         }
 
         return locaTasks;

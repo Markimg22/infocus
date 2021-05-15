@@ -19,20 +19,24 @@ export function TaskComponent({ item }: TaskProps) {
     <View style={styles.container}>
       <Icon
         style={styles.checkboxIcon}
-        name={item.is_completed ? 'check-circle' : 'circle'}
+        name={item.isCompleted ? 'check-circle' : 'circle'}
         onPress={() =>
-          loggedInUser && item.id ? updateTask(item.id) : updateLocalTask(item)
+          loggedInUser && item._id
+            ? updateTask(item._id, !item.isCompleted)
+            : updateLocalTask(item)
         }
       />
       <Text
-        style={item.is_completed ? styles.taskDoneText : styles.taskNormalText}>
+        style={item.isCompleted ? styles.taskDoneText : styles.taskNormalText}>
         {item.title}
       </Text>
       <Icon
         style={styles.deleteIcon}
         name="times-circle"
         onPress={() =>
-          loggedInUser && item.id ? removeTask(item.id) : removeLocalTask(item)
+          loggedInUser && item._id
+            ? removeTask(item._id)
+            : removeLocalTask(item)
         }
       />
     </View>

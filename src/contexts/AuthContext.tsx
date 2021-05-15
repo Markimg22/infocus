@@ -17,7 +17,7 @@ interface AuthContextData {
   tasks: Task[];
   createTask: (title: string) => Promise<void>;
   removeTask: (id: string) => Promise<void>;
-  updateTask: (id: string) => Promise<void>;
+  updateTask: (id: string, value: boolean) => Promise<void>;
   register: (
     email: string,
     password: string,
@@ -59,7 +59,7 @@ export function AuthProvider({ children }: AuthProps) {
 
   const getTasksDatabase = async () => {
     try {
-      const response = await api.get('/tasks');
+      const response = await api.get('/user/tasks');
       setTasks(response.data as Task[]);
     } catch (response) {
       console.error(response.data.errors);
@@ -68,25 +68,25 @@ export function AuthProvider({ children }: AuthProps) {
 
   const createTask = async (title: string) => {
     try {
-      const response = await api.post('/tasks', { title });
-      setTasks([...tasks, response.data as Task]);
+      const response = await api.post('/user/tasks', { title });
+      setTasks(response.data as Task[]);
     } catch (response) {
-      console.error(response.data.errors);
+      setErrorMessage(response.data.errors);
     }
   };
 
   const removeTask = async (id: string) => {
     try {
-      const response = await api.delete(`/tasks/${id}`);
+      const response = await api.delete(`/user/tasks/${id}`);
       setTasks(response.data as Task[]);
     } catch (response) {
       console.error(response.data.errors);
     }
   };
 
-  const updateTask = async (id: string) => {
+  const updateTask = async (id: string, value: boolean) => {
     try {
-      const response = await api.put(`/tasks/${id}`);
+      const response = await api.put(`/user/tasks/${id}`, { value });
       setTasks(response.data as Task[]);
     } catch (response) {
       console.error(response.data.errors);

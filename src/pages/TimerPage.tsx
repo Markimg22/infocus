@@ -20,7 +20,7 @@ export function TimerPage() {
 
   const showTaskNotComplete = (listTasks: Task[]) => {
     listTasks.forEach((task) => {
-      if (!task.is_completed) {
+      if (!task.isCompleted) {
         tasksNotCompleted.push(task);
       }
     });
