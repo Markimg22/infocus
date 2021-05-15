@@ -1,8 +1,10 @@
 import { create } from 'apisauce';
 import AsyncStorage from '@react-native-community/async-storage';
 
+import { apiEnvironmentVariables } from '../config/env';
+
 const api = create({
-  baseURL: 'http://10.0.2.2:3333',
+  baseURL: apiEnvironmentVariables,
 });
 
 api.addAsyncRequestTransform((request) => async () => {
