@@ -8,6 +8,8 @@ import { Google, Facebook } from '../assets/svg/icon';
 
 import { AuthContext } from '../contexts/AuthContext';
 
+import { Color, FontSize, scale } from '../config/style';
+
 export function LoginPage({ navigation }: any) {
   const [email, setEmail] = useState('user3@hotmail.com');
   const [password, setPassword] = useState('123');
@@ -72,66 +74,66 @@ export function LoginPage({ navigation }: any) {
 
 const styles = StyleSheet.create({
   errorMessageContainer: {
-    backgroundColor: '#ccc',
+    backgroundColor: Color.grayColor,
     width: '100%',
-    padding: 10,
-    borderRadius: 10,
-    marginBottom: 14,
+    padding: scale(10),
+    borderRadius: scale(15),
+    marginBottom: scale(14),
   },
   errorMessage: {
-    color: '#ec2027',
-    fontSize: 16,
+    color: Color.redColor,
+    fontSize: FontSize.small,
     textAlign: 'center',
   },
   logginWithContainer: {
     alignSelf: 'center',
-    marginTop: 20,
+    marginTop: scale(20),
   },
   imagesContainer: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     width: '90%',
-    marginTop: 20,
+    marginTop: scale(20),
   },
   orContainer: {
-    marginTop: 25,
+    marginTop: scale(25),
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
   },
   line: {
-    backgroundColor: '#CFD8DC',
-    height: 2,
+    backgroundColor: Color.grayColor,
+    height: scale(2),
     width: '40%',
   },
   text: {
-    color: '#CFD8DC',
-    fontSize: 20,
+    color: Color.grayColor,
+    fontSize: FontSize.medium,
     fontWeight: 'bold',
     textAlign: 'center',
   },
   notAccountText: {
-    color: '#CFD8DC',
+    color: Color.grayColor,
     textDecorationLine: 'underline',
-    fontSize: 15,
+    fontSize: FontSize.small,
   },
   notAccountContainer: {
-    marginTop: 14,
+    marginTop: scale(14),
     alignSelf: 'flex-end',
   },
   title: {
     textAlign: 'center',
-    marginTop: 30,
-    fontSize: 30,
-    color: '#fff',
+    marginTop: scale(30),
+    fontSize: FontSize.title,
+    color: Color.primaryColor,
     fontWeight: 'bold',
   },
   container: {
     flex: 1,
-    backgroundColor: '#333238',
+    backgroundColor: Color.backgroundColor,
   },
   form: {
-    marginTop: 30,
+    marginTop: scale(30),
     width: '90%',
     alignSelf: 'center',
   },

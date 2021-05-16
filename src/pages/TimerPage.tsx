@@ -12,6 +12,8 @@ import { AuthContext } from '../contexts/AuthContext';
 
 import { Task } from '../types/Task';
 
+import { Color } from '../config/style';
+
 export function TimerPage() {
   const { locaTasks } = useContext(TaskContext);
   const { tasks, loggedInUser } = useContext(AuthContext);
@@ -50,7 +52,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    backgroundColor: '#333238',
+    backgroundColor: Color.backgroundColor,
   },
   buttonsContainer: {
     width: '50%',

@@ -4,6 +4,8 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import { CountdownContext } from 'contexts/CountdownContext';
 
+import { Color } from '../config/style';
+
 export function ResetButton() {
   const { resetCountdown } = useContext(CountdownContext);
 
@@ -14,7 +16,7 @@ export function ResetButton() {
 
 const styles = StyleSheet.create({
   icon: {
-    color: '#fff',
+    color: Color.primaryColor,
     alignSelf: 'flex-end',
   },
 });

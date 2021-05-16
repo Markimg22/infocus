@@ -4,6 +4,8 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import { AuthContext } from '../contexts/AuthContext';
 
+import { Color, FontSize, scale } from '../config/style';
+
 export function Profile() {
   const { signOut, loggedInUser } = useContext(AuthContext);
 
@@ -46,26 +48,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   iconLoggout: {
-    color: '#282631',
-    fontSize: 30,
+    color: Color.contrastColor,
+    fontSize: FontSize.title,
   },
   iconAvatar: {
-    color: '#CFD8DC',
-    fontSize: 60,
-    borderColor: '#CFD8DC',
+    color: Color.primaryColor,
+    fontSize: scale(60),
+    borderColor: Color.primaryColor,
   },
   container: {
     flexDirection: 'row',
-    marginTop: 30,
+    marginTop: scale(30),
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '90%',
     alignSelf: 'center',
   },
   userNameText: {
-    color: '#fff',
-    fontSize: 30,
+    color: Color.primaryColor,
+    fontSize: FontSize.title,
     fontWeight: 'bold',
-    marginLeft: 10,
+    marginLeft: scale(10),
   },
 });

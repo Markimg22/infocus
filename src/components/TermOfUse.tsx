@@ -3,6 +3,8 @@ import { Text, Modal, StyleSheet, ScrollView, View } from 'react-native';
 
 import { Button } from './Button';
 
+import { Color, FontSize, scale } from '../config/style';
+
 interface TermOfUseProps {
   visible: boolean;
   showModal: (value: boolean) => void;
@@ -198,41 +200,41 @@ export function TermOfUse({ visible, showModal }: TermOfUseProps) {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    marginTop: 20,
-    marginBottom: 30,
+    marginTop: scale(20),
+    marginBottom: scale(30),
   },
   strongText: {
     fontWeight: 'bold',
   },
   italicText: {
-    color: '#fff',
+    color: Color.primaryColor,
     textAlign: 'center',
     fontStyle: 'italic',
   },
   subTitle: {
-    color: '#fff',
+    color: Color.primaryColor,
     textAlign: 'center',
-    fontSize: 15,
+    fontSize: FontSize.small,
     fontWeight: 'bold',
   },
   container: {
-    backgroundColor: '#282631',
+    backgroundColor: Color.contrastColor,
     alignSelf: 'center',
     maxHeight: '98%',
     width: '95%',
-    borderRadius: 10,
+    borderRadius: scale(15),
     opacity: 0.98,
-    padding: 15,
+    padding: scale(15),
   },
   title: {
-    color: '#fff',
-    fontSize: 18,
+    color: Color.primaryColor,
+    fontSize: FontSize.medium,
     fontWeight: 'bold',
     textAlign: 'center',
   },
   text: {
-    color: '#fff',
+    color: Color.primaryColor,
     textAlign: 'justify',
-    marginBottom: 5,
+    marginBottom: scale(5),
   },
 });

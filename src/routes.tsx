@@ -15,6 +15,8 @@ import { RegisterPage } from './pages/RegisterPage';
 
 import { AuthContext } from './contexts/AuthContext';
 
+import { Color } from './config/style';
+
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
 
@@ -76,6 +78,6 @@ const BottomBar = () => {
 
 const styles = StyleSheet.create({
   bottomBar: {
-    backgroundColor: '#282631',
+    backgroundColor: Color.contrastColor,
   },
 });

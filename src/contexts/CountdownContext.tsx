@@ -20,8 +20,8 @@ export const CountdownContext = createContext({} as CountdownContextData);
 
 let countdownTimeout: number;
 
-const restingTime = 0.1 * 60;
-const workingTime = 0.2 * 60;
+const restingTime = 5 * 60;
+const workingTime = 25 * 60;
 
 export function CountdownProvider({ children }: CountdownProviderProps) {
   const [time, setTime] = useState(workingTime);
@@ -31,24 +31,6 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
-
-  function startCountdown() {
-    setCountdownIsPlaying(true);
-  }
-
-  function pauseCountdown() {
-    setCountdownIsPlaying(false);
-  }
-
-  function resetCountdown() {
-    clearTimeout(countdownTimeout);
-    setTime(isResting ? restingTime : workingTime);
-    setKey((prevKey) => prevKey + 1);
-  }
-
-  function changeCountdown() {
-    setIsResting(!isResting);
-  }
 
   // Change Time
   useEffect(() => {
@@ -64,6 +46,24 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
       }, 1000);
     }
   }, [countdownIsPlaying, time]);
+
+  const startCountdown = () => {
+    setCountdownIsPlaying(true);
+  };
+
+  const pauseCountdown = () => {
+    setCountdownIsPlaying(false);
+  };
+
+  const resetCountdown = () => {
+    clearTimeout(countdownTimeout);
+    setTime(isResting ? restingTime : workingTime);
+    setKey((prevKey) => prevKey + 1);
+  };
+
+  const changeCountdown = () => {
+    setIsResting(!isResting);
+  };
 
   return (
     <CountdownContext.Provider

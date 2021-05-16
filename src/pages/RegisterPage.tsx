@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
@@ -8,6 +7,8 @@ import { Button } from '../components/Button';
 import { TermOfUse } from '../components/TermOfUse';
 
 import { AuthContext } from '../contexts/AuthContext';
+
+import { Color, FontSize, scale } from '../config/style';
 
 export function RegisterPage({ navigation }: any) {
   const [email, setEmail] = useState('');
@@ -54,15 +55,17 @@ export function RegisterPage({ navigation }: any) {
             onValueChange={setAcceptedTerms}
             style={styles.checkbox}
             tintColors={{
-              true: '#BB86FC',
-              false: '#fff',
+              true: Color.purpleColor,
+              false: Color.primaryColor,
             }}
           />
           <TouchableOpacity onPress={() => showModal(true)}>
             <Text
               style={[
                 styles.termText,
-                { color: acceptedTerms ? '#BB86FC' : '#fff' },
+                {
+                  color: acceptedTerms ? Color.purpleColor : Color.primaryColor,
+                },
               ]}>
               Termos de uso
             </Text>
@@ -105,50 +108,50 @@ const styles = StyleSheet.create({
     transform: [{ scaleX: 1.4 }, { scaleY: 1.4 }],
   },
   termText: {
-    fontSize: 20,
+    fontSize: FontSize.medium,
     textDecorationLine: 'underline',
-    marginLeft: 10,
+    marginLeft: scale(10),
   },
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 14,
+    marginBottom: scale(14),
   },
   errorMessageContainer: {
-    backgroundColor: '#ccc',
+    backgroundColor: Color.grayColor,
     width: '100%',
-    padding: 10,
-    borderRadius: 10,
-    marginBottom: 14,
+    padding: scale(10),
+    borderRadius: scale(15),
+    marginBottom: scale(14),
   },
   errorMessage: {
-    color: '#ec2027',
-    fontSize: 16,
+    color: Color.redColor,
+    fontSize: FontSize.small,
     textAlign: 'center',
   },
   accountContainer: {
-    marginTop: 14,
+    marginTop: scale(14),
     alignSelf: 'flex-start',
   },
   accountText: {
-    color: '#CFD8DC',
+    color: Color.grayColor,
     textDecorationLine: 'underline',
-    fontSize: 15,
+    fontSize: FontSize.small,
   },
   title: {
     textAlign: 'center',
-    fontSize: 30,
-    color: '#fff',
+    fontSize: FontSize.title,
+    color: Color.primaryColor,
     fontWeight: 'bold',
-    marginTop: 30,
+    marginTop: scale(30),
   },
   container: {
     flex: 1,
-    backgroundColor: '#333238',
+    backgroundColor: Color.contrastColor,
   },
   form: {
     width: '90%',
     alignSelf: 'center',
-    marginTop: 30,
+    marginTop: scale(30),
   },
 });

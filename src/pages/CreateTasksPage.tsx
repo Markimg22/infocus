@@ -14,6 +14,8 @@ import { ListTasks } from '../components/ListTasks';
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
 
+import { Color, FontSize, scale } from '../config/style';
+
 export function CreateTasksPage() {
   const [title, setTitle] = useState('');
 
@@ -63,32 +65,33 @@ export function CreateTasksPage() {
 
 const styles = StyleSheet.create({
   errorMessageContainer: {
-    backgroundColor: '#ccc',
+    backgroundColor: Color.grayColor,
     width: '100%',
-    padding: 10,
-    borderRadius: 10,
-    marginBottom: 14,
+    padding: scale(10),
+    borderRadius: scale(15),
+    marginBottom: scale(14),
   },
   errorMessage: {
-    color: '#ec2027',
-    fontSize: 16,
+    color: Color.redColor,
+    fontSize: FontSize.small,
     textAlign: 'center',
   },
   container: {
     flex: 1,
-    backgroundColor: '#333238',
+    backgroundColor: Color.backgroundColor,
   },
   form: {
-    paddingVertical: 20,
+    paddingVertical: scale(20),
     alignSelf: 'center',
     width: '90%',
-    borderTopWidth: 1,
+    borderTopWidth: scale(2),
+    borderColor: Color.contrastColor,
   },
   title: {
     textAlign: 'center',
-    marginTop: 30,
-    fontSize: 30,
-    color: '#fff',
+    marginTop: scale(30),
+    fontSize: FontSize.title,
+    color: Color.primaryColor,
     fontWeight: 'bold',
   },
   titleContainer: {

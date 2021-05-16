@@ -6,6 +6,8 @@ import {
   Text,
 } from 'react-native';
 
+import { Color, FontSize, scale } from '../config/style';
+
 interface ButtonProps extends TouchableOpacityProps {
   text: string;
 }
@@ -20,13 +22,13 @@ export function Button(props: ButtonProps) {
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 15,
-    backgroundColor: '#BB86FC',
-    padding: 15,
+    borderRadius: scale(15),
+    backgroundColor: Color.purpleColor,
+    padding: scale(15),
   },
   buttonText: {
-    color: '#fff',
-    fontSize: 28,
+    color: Color.primaryColor,
+    fontSize: FontSize.button,
     fontWeight: 'bold',
     textAlign: 'center',
   },

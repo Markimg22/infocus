@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
+import { Color, FontSize, scale } from '../config/style';
+
 export function UserPerformance() {
   return (
     <View style={styles.container}>
@@ -23,24 +25,24 @@ export function UserPerformance() {
 
 const styles = StyleSheet.create({
   infoText: {
-    color: '#CFD8DC',
-    fontSize: 14,
+    color: Color.grayColor,
+    fontSize: FontSize.small,
   },
   infoContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   container: {
-    padding: 20,
+    padding: scale(20),
   },
   subtitle: {
-    color: '#fff',
-    fontSize: 20,
+    color: Color.primaryColor,
+    fontSize: FontSize.small,
   },
   title: {
-    fontSize: 24,
+    fontSize: FontSize.medium,
     fontWeight: 'bold',
-    color: '#CFD8DC',
-    marginBottom: 20,
+    color: Color.grayColor,
+    marginBottom: scale(20),
   },
 });

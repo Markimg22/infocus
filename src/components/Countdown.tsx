@@ -4,6 +4,8 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
 import { CountdownContext } from 'contexts/CountdownContext';
 
+import { Color, FontSize, scale } from '../config/style';
+
 export function Countdown() {
   const { time, minutes, seconds, countdownIsPlaying, key, changeCountdown } =
     useContext(CountdownContext);
@@ -15,9 +17,9 @@ export function Countdown() {
     <CountdownCircleTimer
       key={key}
       isPlaying={countdownIsPlaying}
-      colors="#BB86FC"
-      strokeWidth={15}
-      size={200}
+      colors={Color.purpleColor}
+      strokeWidth={scale(15)}
+      size={scale(200)}
       duration={time}
       initialRemainingTime={time}
       onComplete={changeCountdown}>
@@ -42,14 +44,14 @@ export function Countdown() {
 const styles = StyleSheet.create({
   timerText: {
     textAlign: 'center',
-    color: '#fff',
-    fontSize: 45,
+    color: Color.primaryColor,
+    fontSize: FontSize.headline,
     fontWeight: 'bold',
   },
   timerInfoText: {
     textAlign: 'center',
-    color: '#fff',
-    fontSize: 15,
+    color: Color.primaryColor,
+    fontSize: FontSize.small,
     fontWeight: 'bold',
   },
 });

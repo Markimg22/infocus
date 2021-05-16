@@ -7,6 +7,8 @@ import { AuthContext } from '../contexts/AuthContext';
 
 import { Task } from '../types/Task';
 
+import { Color, FontSize, scale } from '../config/style';
+
 interface TaskProps {
   item: Task;
 }
@@ -45,33 +47,33 @@ export function TaskComponent({ item }: TaskProps) {
 
 const styles = StyleSheet.create({
   container: {
-    width: 350,
-    backgroundColor: '#fff',
+    width: scale(350),
+    backgroundColor: Color.primaryColor,
     flexDirection: 'row',
     alignSelf: 'center',
     justifyContent: 'space-between',
-    borderRadius: 15,
-    padding: 10,
-    margin: 10,
+    borderRadius: scale(15),
+    padding: scale(10),
+    margin: scale(10),
   },
   checkboxIcon: {
-    color: '#282631',
-    fontSize: 30,
+    color: Color.contrastColor,
+    fontSize: FontSize.title,
     fontWeight: 'bold',
   },
   taskNormalText: {
-    color: '#282631',
-    fontSize: 23,
+    color: Color.contrastColor,
+    fontSize: FontSize.medium,
     fontWeight: 'bold',
   },
   taskDoneText: {
     textDecorationLine: 'line-through',
-    color: '#282631',
-    fontSize: 23,
+    color: Color.contrastColor,
+    fontSize: FontSize.medium,
     fontWeight: 'bold',
   },
   deleteIcon: {
-    color: '#FF5757',
-    fontSize: 30,
+    color: Color.redColor,
+    fontSize: FontSize.title,
   },
 });
