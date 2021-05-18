@@ -22,8 +22,8 @@ export const CountdownContext = createContext({} as CountdownContextData);
 
 let countdownTimeout: number;
 
-const restingTime = 5 * 60;
-const workingTime = 25 * 60;
+const restingTime = 0.2 * 60;
+const workingTime = 0.5 * 60;
 
 export function CountdownProvider({ children }: CountdownProviderProps) {
   const [time, setTime] = useState(workingTime);
@@ -69,7 +69,6 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
 
   const startCountdown = () => {
     setCountdownIsPlaying(true);
-    playSound();
   };
 
   const pauseCountdown = () => {
@@ -84,6 +83,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
 
   const changeCountdown = () => {
     setIsResting(!isResting);
+    playSound();
   };
 
   return (
