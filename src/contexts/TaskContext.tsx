@@ -23,12 +23,12 @@ export function TaskProvider({ children }: TaskProps) {
     const search = locaTasks.filter((task) => task.title === title);
 
     if (title === '') {
-      Alert.alert('Atenção', 'Insira um título para sua atividade.');
+      Alert.alert('Houve um erro', 'Insira um título para sua tarefa.');
       return;
     }
 
     if (search.length !== 0) {
-      Alert.alert('Atenção!', 'Nome da tarefa repetido, tente outro.');
+      Alert.alert('Houve um erro', 'Tarefa já existe, tente outra.');
       return;
     }
 

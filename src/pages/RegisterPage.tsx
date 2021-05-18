@@ -5,6 +5,7 @@ import CheckBox from '@react-native-community/checkbox';
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
 import { TermOfUse } from '../components/TermOfUse';
+import { ErrorComponent } from '../components/ErrorComponent';
 
 import { AuthContext } from '../contexts/AuthContext';
 
@@ -59,24 +60,15 @@ export function RegisterPage({ navigation }: any) {
               false: Color.primaryColor,
             }}
           />
-          <TouchableOpacity onPress={() => showModal(true)}>
-            <Text
-              style={[
-                styles.termText,
-                {
-                  color: acceptedTerms ? Color.purpleColor : Color.primaryColor,
-                },
-              ]}>
-              Termos de uso
-            </Text>
-          </TouchableOpacity>
+          <Text style={styles.text}>
+            Declaro que li e aceito os{' '}
+            <TouchableOpacity onPress={() => showModal(true)}>
+              <Text style={styles.termText}>termos de uso.</Text>
+            </TouchableOpacity>
+          </Text>
         </View>
         <TermOfUse visible={showTermOfUse} showModal={showModal} />
-        {!!errorMessage && (
-          <View style={styles.errorMessageContainer}>
-            <Text style={styles.errorMessage}>{errorMessage}</Text>
-          </View>
-        )}
+        {!!errorMessage && <ErrorComponent message={errorMessage} />}
         <Button
           text="Cadastrar"
           onPress={() => {
@@ -107,15 +99,22 @@ const styles = StyleSheet.create({
   checkbox: {
     transform: [{ scaleX: 1.4 }, { scaleY: 1.4 }],
   },
+  text: {
+    fontSize: FontSize.medium,
+    color: Color.primaryColor,
+    marginLeft: scale(10),
+  },
   termText: {
     fontSize: FontSize.medium,
     textDecorationLine: 'underline',
-    marginLeft: scale(10),
+    color: Color.purpleColor,
   },
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: scale(14),
+    padding: scale(5),
+    marginRight: scale(10),
   },
   errorMessageContainer: {
     backgroundColor: Color.grayColor,
@@ -147,7 +146,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: Color.contrastColor,
+    backgroundColor: Color.backgroundColor,
   },
   form: {
     width: '90%',

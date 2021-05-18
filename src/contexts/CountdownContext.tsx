@@ -1,5 +1,7 @@
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
 
+import Sound from 'react-native-sound';
+
 interface CountdownContextData {
   time: number;
   minutes: number;
@@ -32,6 +34,16 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
 
+  const soundAlert = new Sound(
+    'notification.mp3',
+    Sound.MAIN_BUNDLE,
+    (error: any) => {
+      if (error) {
+        console.error(error);
+      }
+    },
+  );
+
   // Change Time
   useEffect(() => {
     setTime(isResting ? restingTime : workingTime);
@@ -47,8 +59,17 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     }
   }, [countdownIsPlaying, time]);
 
+  const playSound = () => {
+    soundAlert.play((success: boolean) => {
+      if (!success) {
+        console.error('Sound not play');
+      }
+    });
+  };
+
   const startCountdown = () => {
     setCountdownIsPlaying(true);
+    playSound();
   };
 
   const pauseCountdown = () => {

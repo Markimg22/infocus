@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
+import { ErrorComponent } from '../components/ErrorComponent';
 
 import { Google, Facebook } from '../assets/svg/icon';
 
@@ -35,11 +36,7 @@ export function LoginPage({ navigation }: any) {
           value={password}
           onChangeText={(text) => setPassword(text)}
         />
-        {!!errorMessage && (
-          <View style={styles.errorMessageContainer}>
-            <Text style={styles.errorMessage}>{errorMessage}</Text>
-          </View>
-        )}
+        {!!errorMessage && <ErrorComponent message={errorMessage} />}
         <Button text="Entrar" onPress={() => signIn(email, password)} />
         <TouchableOpacity
           style={styles.notAccountContainer}
@@ -73,18 +70,6 @@ export function LoginPage({ navigation }: any) {
 }
 
 const styles = StyleSheet.create({
-  errorMessageContainer: {
-    backgroundColor: Color.grayColor,
-    width: '100%',
-    padding: scale(10),
-    borderRadius: scale(15),
-    marginBottom: scale(14),
-  },
-  errorMessage: {
-    color: Color.redColor,
-    fontSize: FontSize.small,
-    textAlign: 'center',
-  },
   logginWithContainer: {
     alignSelf: 'center',
     marginTop: scale(20),

@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
+import { Alert } from 'react-native';
 
 import api from '../services/api';
 
@@ -62,7 +63,7 @@ export function AuthProvider({ children }: AuthProps) {
       const response = await api.get('/user/tasks');
       setTasks(response.data as Task[]);
     } catch (response) {
-      console.error(response.data.errors);
+      Alert.alert('Houve um erro', response.data.errors);
     }
   };
 
@@ -71,7 +72,7 @@ export function AuthProvider({ children }: AuthProps) {
       const response = await api.post('/user/tasks', { title });
       setTasks(response.data as Task[]);
     } catch (response) {
-      setErrorMessage(response.data.errors);
+      Alert.alert('Houve um erro', response.data.errors);
     }
   };
 
@@ -80,7 +81,7 @@ export function AuthProvider({ children }: AuthProps) {
       const response = await api.delete(`/user/tasks/${id}`);
       setTasks(response.data as Task[]);
     } catch (response) {
-      console.error(response.data.errors);
+      Alert.alert('Houve um erro', response.data.errors);
     }
   };
 
@@ -89,7 +90,7 @@ export function AuthProvider({ children }: AuthProps) {
       const response = await api.put(`/user/tasks/${id}`, { value });
       setTasks(response.data as Task[]);
     } catch (response) {
-      console.error(response.data.errors);
+      Alert.alert('Houve um erro', response.data.errors);
     }
   };
 
