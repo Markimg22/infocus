@@ -12,6 +12,7 @@ import { CreateTasksPage } from './pages/CreateTasksPage';
 import { LoginPage } from './pages/LoginPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { RegisterPage } from './pages/RegisterPage';
+import { OnboardingScreen } from './pages/OnboardingScreen';
 
 import { AuthContext } from './contexts/AuthContext';
 
@@ -29,6 +30,7 @@ export function Routes() {
         }}>
         <Stack.Screen name="BottomBar" component={BottomBar} />
         <Stack.Screen name="RegisterPage" component={RegisterPage} />
+        <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

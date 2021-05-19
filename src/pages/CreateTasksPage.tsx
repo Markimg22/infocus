@@ -44,6 +44,7 @@ export function CreateTasksPage() {
         {!!errorMessage && <ErrorComponent message={errorMessage} />}
         <Button
           text="Adicionar"
+          disabled={title === ''}
           onPress={() => {
             if (loggedInUser) {
               createTask(title);

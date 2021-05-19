@@ -71,6 +71,12 @@ export function RegisterPage({ navigation }: any) {
         {!!errorMessage && <ErrorComponent message={errorMessage} />}
         <Button
           text="Cadastrar"
+          disabled={
+            email === '' ||
+            password === '' ||
+            passwordAgain === '' ||
+            !acceptedTerms
+          }
           onPress={() => {
             if (acceptedTerms) {
               register(email, password, passwordAgain);

@@ -14,7 +14,14 @@ interface ButtonProps extends TouchableOpacityProps {
 
 export function Button(props: ButtonProps) {
   return (
-    <TouchableOpacity style={styles.button} {...props}>
+    <TouchableOpacity
+      style={[
+        styles.button,
+        {
+          backgroundColor: props.disabled ? Color.grayColor : Color.purpleColor,
+        },
+      ]}
+      {...props}>
       <Text style={styles.buttonText}>{props.text}</Text>
     </TouchableOpacity>
   );
@@ -23,7 +30,6 @@ export function Button(props: ButtonProps) {
 const styles = StyleSheet.create({
   button: {
     borderRadius: scale(15),
-    backgroundColor: Color.purpleColor,
     padding: scale(15),
   },
   buttonText: {

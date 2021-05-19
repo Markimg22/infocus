@@ -37,7 +37,11 @@ export function LoginPage({ navigation }: any) {
           onChangeText={(text) => setPassword(text)}
         />
         {!!errorMessage && <ErrorComponent message={errorMessage} />}
-        <Button text="Entrar" onPress={() => signIn(email, password)} />
+        <Button
+          text="Entrar"
+          onPress={() => signIn(email, password)}
+          disabled={email === '' || password === ''}
+        />
         <TouchableOpacity
           style={styles.notAccountContainer}
           onPress={() => {
