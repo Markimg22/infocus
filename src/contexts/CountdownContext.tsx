@@ -39,7 +39,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     Sound.MAIN_BUNDLE,
     (error: any) => {
       if (error) {
-        console.error(error);
+        console.error('Sound not found');
       }
     },
   );
@@ -52,7 +52,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
 
   // Countdown
   useEffect(() => {
-    if (countdownIsPlaying && time > 0) {
+    if (countdownIsPlaying && time > 1) {
       countdownTimeout = setTimeout(() => {
         setTime(time - 1);
       }, 1000);
@@ -76,8 +76,8 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   };
 
   const resetCountdown = () => {
-    clearTimeout(countdownTimeout);
     setTime(isResting ? restingTime : workingTime);
+    clearTimeout(countdownTimeout);
     setKey((prevKey) => prevKey + 1);
   };
 
