@@ -122,18 +122,6 @@ const styles = StyleSheet.create({
     padding: scale(5),
     marginRight: scale(10),
   },
-  errorMessageContainer: {
-    backgroundColor: Color.grayColor,
-    width: '100%',
-    padding: scale(10),
-    borderRadius: scale(15),
-    marginBottom: scale(14),
-  },
-  errorMessage: {
-    color: Color.redColor,
-    fontSize: FontSize.small,
-    textAlign: 'center',
-  },
   accountContainer: {
     marginTop: scale(14),
     alignSelf: 'flex-start',
@@ -148,7 +136,8 @@ const styles = StyleSheet.create({
     fontSize: FontSize.title,
     color: Color.primaryColor,
     fontWeight: 'bold',
-    marginTop: scale(30),
+    marginTop: scale(40),
+    paddingHorizontal: scale(15),
   },
   container: {
     flex: 1,
