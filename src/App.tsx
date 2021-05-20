@@ -1,21 +1,18 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
+
+import { TaskProvider } from './contexts/TaskContext';
+import { AuthProvider } from './contexts/AuthContext';
+import { CountdownProvider } from './contexts/CountdownContext';
 
 import { Routes } from './routes';
-
-import { TaskProvider } from 'contexts/TaskContext';
-import { AuthProvider } from 'contexts/AuthContext';
 
 export default function App() {
   return (
     <AuthProvider>
       <TaskProvider>
-        <StatusBar
-          translucent
-          backgroundColor="transparent"
-          barStyle="light-content"
-        />
-        <Routes />
+        <CountdownProvider>
+          <Routes />
+        </CountdownProvider>
       </TaskProvider>
     </AuthProvider>
   );

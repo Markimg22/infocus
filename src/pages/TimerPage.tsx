@@ -6,7 +6,6 @@ import { StartOrPauseButton } from '../components/StartOrPauseButton';
 import { ResetButton } from '../components/ResetButton';
 import { TaskComponent } from '../components/TaskComponent';
 
-import { CountdownProvider } from '../contexts/CountdownContext';
 import { TaskContext } from '../contexts/TaskContext';
 import { AuthContext } from '../contexts/AuthContext';
 
@@ -29,21 +28,19 @@ export function TimerPage() {
   };
 
   return (
-    <CountdownProvider>
-      <View style={styles.container}>
-        {loggedInUser
-          ? showTaskNotComplete(tasks)
-          : showTaskNotComplete(locaTasks)}
-        {tasksNotCompleted.length > 0 && (
-          <TaskComponent item={tasksNotCompleted[0]} />
-        )}
-        <Countdown />
-        <View style={styles.buttonsContainer}>
-          <StartOrPauseButton />
-          <ResetButton />
-        </View>
+    <View style={styles.container}>
+      {loggedInUser
+        ? showTaskNotComplete(tasks)
+        : showTaskNotComplete(locaTasks)}
+      {tasksNotCompleted.length > 0 && (
+        <TaskComponent item={tasksNotCompleted[0]} />
+      )}
+      <Countdown />
+      <View style={styles.buttonsContainer}>
+        <StartOrPauseButton />
+        <ResetButton />
       </View>
-    </CountdownProvider>
+    </View>
   );
 }
 

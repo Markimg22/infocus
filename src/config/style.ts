@@ -12,7 +12,7 @@ export const scale = (size: number) => (width / ReferenceSize.WIDTH) * size;
 
 export const Color = {
   primaryColor: '#fff',
-  backgroundColor: '#1a1a1a',
+  backgroundColor: '#141414',
   contrastColor: '#222222',
   purpleColor: '#BB86FC',
   grayColor: '#ABABAB',

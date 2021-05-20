@@ -13,7 +13,7 @@ const itens: string[] = [
 
 const screenWidth: number = Dimensions.get('window').width;
 
-export function OnboardingScreen({ navigation }: any) {
+export function Onboarding({ navigation }: any) {
   const [itemIndex, setItemIndex] = useState(0);
 
   const updateItemIndex = (event: any) => {

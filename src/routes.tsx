@@ -12,7 +12,8 @@ import { CreateTasksPage } from './pages/CreateTasksPage';
 import { LoginPage } from './pages/LoginPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { RegisterPage } from './pages/RegisterPage';
-import { OnboardingScreen } from './pages/OnboardingScreen';
+import { Onboarding } from './pages/Onboarding';
+import { Splash } from './pages/Splash';
 
 import { AuthContext } from './contexts/AuthContext';
 
@@ -25,12 +26,14 @@ export function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator
+        initialRouteName="Splash"
         screenOptions={{
           headerShown: false,
         }}>
-        <Stack.Screen name="BottomBar" component={BottomBar} />
+        <Stack.Screen name="Splash" component={Splash} />
+        <Stack.Screen name="Onboarding" component={Onboarding} />
         <Stack.Screen name="RegisterPage" component={RegisterPage} />
-        <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
+        <Stack.Screen name="BottomBar" component={BottomBar} />
       </Stack.Navigator>
     </NavigationContainer>
   );
