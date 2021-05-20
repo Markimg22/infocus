@@ -48,7 +48,7 @@ export function Onboarding({ navigation }: any) {
       <View style={styles.buttonContainer}>
         <Button
           text={'Vamos lá!'}
-          onPress={() => navigation.navigate('TimerPage')}
+          onPress={() => navigation.navigate('BottomBar')}
           disabled={itemIndex !== 2}
         />
       </View>
