@@ -146,7 +146,7 @@ export function AuthProvider({ children }: AuthProps) {
   };
 
   const signOut = async () => {
-    await AsyncStorage.clear();
+    await AsyncStorage.multiRemove(['@InfocusApp:user', '@InfocusApp:token']);
     setLoggedInUser(null);
     setTasks([]);
   };
