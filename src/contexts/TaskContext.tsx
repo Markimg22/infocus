@@ -44,19 +44,20 @@ export function TaskProvider({ children }: TaskProps) {
 
       if (title === '') {
         Alert.alert('Houve um erro', 'Insira um título para sua tarefa.');
+        setLoadingLocal(false);
         return;
       }
 
       if (search.length !== 0) {
         Alert.alert('Houve um erro', 'Tarefa já existe, tente outra.');
+        setLoadingLocal(false);
         return;
       }
 
-      setLocalTasks([...locaTasks, { title, isCompleted: false }]);
-      await AsyncStorage.setItem(
-        '@InfocusApp:tasks',
-        JSON.stringify(locaTasks),
-      );
+      const newTasks = [...locaTasks, { title, isCompleted: false }];
+
+      setLocalTasks(newTasks);
+      await AsyncStorage.setItem('@InfocusApp:tasks', JSON.stringify(newTasks));
 
       setLoadingLocal(false);
       return locaTasks;
@@ -73,10 +74,7 @@ export function TaskProvider({ children }: TaskProps) {
       const newTasks = locaTasks.filter((task) => task !== item);
 
       setLocalTasks(newTasks);
-      await AsyncStorage.setItem(
-        '@InfocusApp:tasks',
-        JSON.stringify(locaTasks),
-      );
+      await AsyncStorage.setItem('@InfocusApp:tasks', JSON.stringify(newTasks));
 
       setLoadingLocal(false);
       return locaTasks;
@@ -99,10 +97,7 @@ export function TaskProvider({ children }: TaskProps) {
       });
 
       setLocalTasks(newTasks);
-      await AsyncStorage.setItem(
-        '@InfocusApp:tasks',
-        JSON.stringify(locaTasks),
-      );
+      await AsyncStorage.setItem('@InfocusApp:tasks', JSON.stringify(newTasks));
 
       setLoadingLocal(false);
     } catch (e) {
