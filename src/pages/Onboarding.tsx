@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, ScrollView, Text, StyleSheet, Dimensions } from 'react-native';
 
-import { Button } from '../components/Button';
+import { PrimaryButton } from '../components/PrimaryButton';
 
 import { Color, FontSize, scale } from 'config/style';
 
@@ -46,7 +46,7 @@ export function Onboarding({ navigation }: any) {
         ))}
       </View>
       <View style={styles.buttonContainer}>
-        <Button
+        <PrimaryButton
           text={'Vamos lá!'}
           onPress={() => navigation.navigate('BottomBar')}
           disabled={itemIndex !== 2}

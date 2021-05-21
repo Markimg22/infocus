@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { Input } from '../components/Input';
-import { Button } from '../components/Button';
+import { PrimaryButton } from '../components/PrimaryButton';
 import { ErrorComponent } from '../components/ErrorComponent';
 
 import { Google, Facebook } from '../assets/svg/icon';
@@ -15,7 +15,8 @@ export function LoginPage({ navigation }: any) {
   const [email, setEmail] = useState('user3@hotmail.com');
   const [password, setPassword] = useState('123');
 
-  const { errorMessage, signIn, clearErrors } = useContext(AuthContext);
+  const { errorMessage, signIn, clearErrors, loading } =
+    useContext(AuthContext);
 
   return (
     <View style={styles.container}>
@@ -37,10 +38,11 @@ export function LoginPage({ navigation }: any) {
           onChangeText={(text) => setPassword(text)}
         />
         {!!errorMessage && <ErrorComponent message={errorMessage} />}
-        <Button
+        <PrimaryButton
           text="Entrar"
           onPress={() => signIn(email, password)}
-          disabled={email === '' || password === ''}
+          disabled={email === '' || password === '' || loading}
+          loading={loading}
         />
         <TouchableOpacity
           style={styles.notAccountContainer}

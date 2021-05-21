@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, Modal, StyleSheet, ScrollView, View } from 'react-native';
 
-import { Button } from './Button';
+import { PrimaryButton } from './PrimaryButton';
 
 import { Color, FontSize, scale } from '../config/style';
 
@@ -191,7 +191,7 @@ export function TermOfUse({ visible, showModal }: TermOfUseProps) {
           <Text style={styles.strongText}>contato@infocusapp.com.br</Text>.
         </Text>
         <View style={styles.buttonContainer}>
-          <Button text={'Voltar'} onPress={() => showModal(false)} />
+          <PrimaryButton text={'Voltar'} onPress={() => showModal(false)} />
         </View>
       </ScrollView>
     </Modal>

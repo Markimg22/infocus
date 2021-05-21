@@ -16,6 +16,7 @@ interface AuthContextData {
   loggedInUser: User | null;
   errorMessage: string;
   tasks: Task[];
+  loading: boolean;
   createTask: (title: string) => Promise<void>;
   removeTask: (id: string) => Promise<void>;
   updateTask: (id: string, value: boolean) => Promise<void>;
@@ -39,6 +40,7 @@ export function AuthProvider({ children }: AuthProps) {
   const [errorMessage, setErrorMessage] = useState('');
   const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function loadStorageData() {
@@ -68,29 +70,38 @@ export function AuthProvider({ children }: AuthProps) {
   };
 
   const createTask = async (title: string) => {
+    setLoading(true);
     try {
       const response = await api.post('/user/tasks', { title });
       setTasks(response.data as Task[]);
+      setLoading(false);
     } catch (response) {
       Alert.alert('Houve um erro', response.data.errors);
+      setLoading(false);
     }
   };
 
   const removeTask = async (id: string) => {
+    setLoading(true);
     try {
       const response = await api.delete(`/user/tasks/${id}`);
       setTasks(response.data as Task[]);
+      setLoading(false);
     } catch (response) {
       Alert.alert('Houve um erro', response.data.errors);
+      setLoading(false);
     }
   };
 
   const updateTask = async (id: string, value: boolean) => {
+    setLoading(true);
     try {
       const response = await api.put(`/user/tasks/${id}`, { value });
       setTasks(response.data as Task[]);
+      setLoading(false);
     } catch (response) {
       Alert.alert('Houve um erro', response.data.errors);
+      setLoading(false);
     }
   };
 
@@ -99,17 +110,21 @@ export function AuthProvider({ children }: AuthProps) {
     password: string,
     passwordAgain: string,
   ) => {
+    setLoading(true);
     try {
       await api.post('/register', { email, password, passwordAgain });
       await signIn(email, password);
 
       clearErrors();
+      setLoading(false);
     } catch (response) {
       setErrorMessage(response.data.errors);
+      setLoading(false);
     }
   };
 
   const signIn = async (email: string, password: string) => {
+    setLoading(true);
     try {
       const response = await api.post('/login', { email, password });
       const { user, token } = response.data as ResponseData;
@@ -123,8 +138,10 @@ export function AuthProvider({ children }: AuthProps) {
 
       setLoggedInUser(user);
       clearErrors();
+      setLoading(false);
     } catch (response) {
       setErrorMessage(response.data.errors);
+      setLoading(false);
     }
   };
 
@@ -140,6 +157,7 @@ export function AuthProvider({ children }: AuthProps) {
         loggedInUser,
         errorMessage,
         tasks,
+        loading,
         createTask,
         removeTask,
         updateTask,

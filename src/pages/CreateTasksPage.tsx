@@ -12,7 +12,7 @@ import { AuthContext } from '../contexts/AuthContext';
 
 import { ListTasks } from '../components/ListTasks';
 import { Input } from '../components/Input';
-import { Button } from '../components/Button';
+import { PrimaryButton } from '../components/PrimaryButton';
 import { ErrorComponent } from '../components/ErrorComponent';
 
 import { Color, FontSize, scale } from '../config/style';
@@ -21,7 +21,7 @@ export function CreateTasksPage() {
   const [title, setTitle] = useState('');
 
   const { createLocalTask } = useContext(TaskContext);
-  const { createTask, loggedInUser, errorMessage, clearErrors } =
+  const { createTask, loggedInUser, errorMessage, clearErrors, loading } =
     useContext(AuthContext);
 
   return (
@@ -42,9 +42,10 @@ export function CreateTasksPage() {
           onChangeText={(text) => setTitle(text)}
         />
         {!!errorMessage && <ErrorComponent message={errorMessage} />}
-        <Button
+        <PrimaryButton
           text="Adicionar"
-          disabled={title === ''}
+          disabled={title === '' || loading}
+          loading={loading}
           onPress={() => {
             if (loggedInUser) {
               createTask(title);

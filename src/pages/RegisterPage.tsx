@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 
 import { Input } from '../components/Input';
-import { Button } from '../components/Button';
+import { PrimaryButton } from '../components/PrimaryButton';
 import { TermOfUse } from '../components/TermOfUse';
 import { ErrorComponent } from '../components/ErrorComponent';
 
@@ -18,7 +18,8 @@ export function RegisterPage({ navigation }: any) {
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [showTermOfUse, setShowTermOfUse] = useState(false);
 
-  const { register, errorMessage, clearErrors } = useContext(AuthContext);
+  const { register, errorMessage, clearErrors, loading } =
+    useContext(AuthContext);
 
   const showModal = (value: boolean) => {
     setShowTermOfUse(value);
@@ -69,17 +70,20 @@ export function RegisterPage({ navigation }: any) {
         </View>
         <TermOfUse visible={showTermOfUse} showModal={showModal} />
         {!!errorMessage && <ErrorComponent message={errorMessage} />}
-        <Button
+        <PrimaryButton
           text="Cadastrar"
           disabled={
             email === '' ||
             password === '' ||
             passwordAgain === '' ||
-            !acceptedTerms
+            !acceptedTerms ||
+            loading
           }
+          loading={loading}
           onPress={() => {
             if (acceptedTerms) {
               register(email, password, passwordAgain);
+              navigation.navigate('BottomBar');
             } else {
               Alert.alert(
                 'Aceitar Termos de Uso!',
