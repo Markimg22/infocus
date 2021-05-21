@@ -213,7 +213,6 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     color: Color.primaryColor,
-    textAlign: 'center',
     fontSize: FontSize.small,
     fontWeight: 'bold',
   },

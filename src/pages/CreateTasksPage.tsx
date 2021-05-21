@@ -20,7 +20,7 @@ import { Color, FontSize, scale } from '../config/style';
 export function CreateTasksPage() {
   const [title, setTitle] = useState('');
 
-  const { createLocalTask } = useContext(TaskContext);
+  const { createLocalTask, loadingLocal } = useContext(TaskContext);
   const { createTask, loggedInUser, errorMessage, clearErrors, loading } =
     useContext(AuthContext);
 
@@ -44,8 +44,8 @@ export function CreateTasksPage() {
         {!!errorMessage && <ErrorComponent message={errorMessage} />}
         <PrimaryButton
           text="Adicionar"
-          disabled={title === '' || loading}
-          loading={loading}
+          disabled={title === '' || loading || loadingLocal}
+          loading={loading || loadingLocal}
           onPress={() => {
             if (loggedInUser) {
               createTask(title);

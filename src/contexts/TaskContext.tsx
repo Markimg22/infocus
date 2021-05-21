@@ -1,13 +1,15 @@
-import React, { createContext, useState, ReactNode } from 'react';
+import React, { createContext, useState, ReactNode, useEffect } from 'react';
+import AsyncStorage from '@react-native-community/async-storage';
 import { Alert } from 'react-native';
 
 import { Task } from '../types/Task';
 
 interface TaskContextData {
   locaTasks: Task[];
-  createLocalTask: (title: string) => Task[] | undefined;
-  removeLocalTask: (item: Task) => Task[];
-  updateLocalTask: (item: Task) => void;
+  loadingLocal: boolean;
+  createLocalTask: (title: string) => Promise<Task[] | undefined>;
+  removeLocalTask: (item: Task) => Promise<Task[] | undefined>;
+  updateLocalTask: (item: Task) => Promise<void>;
 }
 
 interface TaskProps {
@@ -18,45 +20,102 @@ export const TaskContext = createContext({} as TaskContextData);
 
 export function TaskProvider({ children }: TaskProps) {
   const [locaTasks, setLocalTasks] = useState<Task[]>([]);
+  const [loadingLocal, setLoadingLocal] = useState(false);
 
-  const createLocalTask = (title: string) => {
-    const search = locaTasks.filter((task) => task.title === title);
+  useEffect(() => {
+    async function loadLocalTasks() {
+      const tasks = await AsyncStorage.getItem('@InfocusApp:tasks');
 
-    if (title === '') {
-      Alert.alert('Houve um erro', 'Insira um título para sua tarefa.');
-      return;
+      if (!tasks) {
+        await AsyncStorage.setItem('@InfocusApp:tasks', '[]');
+      } else {
+        setLocalTasks(JSON.parse(tasks));
+      }
     }
 
-    if (search.length !== 0) {
-      Alert.alert('Houve um erro', 'Tarefa já existe, tente outra.');
-      return;
+    loadLocalTasks();
+  }, []);
+
+  const createLocalTask = async (title: string) => {
+    setLoadingLocal(true);
+
+    try {
+      const search = locaTasks.filter((task) => task.title === title);
+
+      if (title === '') {
+        Alert.alert('Houve um erro', 'Insira um título para sua tarefa.');
+        return;
+      }
+
+      if (search.length !== 0) {
+        Alert.alert('Houve um erro', 'Tarefa já existe, tente outra.');
+        return;
+      }
+
+      setLocalTasks([...locaTasks, { title, isCompleted: false }]);
+      await AsyncStorage.setItem(
+        '@InfocusApp:tasks',
+        JSON.stringify(locaTasks),
+      );
+
+      setLoadingLocal(false);
+      return locaTasks;
+    } catch (e) {
+      setLoadingLocal(false);
+      console.error('Houve um erro ao criar tareafa');
     }
-
-    setLocalTasks([...locaTasks, { title, isCompleted: false }]);
-    return locaTasks;
   };
 
-  const removeLocalTask = (item: Task) => {
-    setLocalTasks(locaTasks.filter((task) => task !== item));
-    return locaTasks;
+  const removeLocalTask = async (item: Task) => {
+    setLoadingLocal(true);
+
+    try {
+      const newTasks = locaTasks.filter((task) => task !== item);
+
+      setLocalTasks(newTasks);
+      await AsyncStorage.setItem(
+        '@InfocusApp:tasks',
+        JSON.stringify(locaTasks),
+      );
+
+      setLoadingLocal(false);
+      return locaTasks;
+    } catch (e) {
+      setLoadingLocal(false);
+      console.error('Houve um erro ao remover tarefa');
+    }
   };
 
-  const updateLocalTask = (item: Task) => {
-    setLocalTasks(
-      locaTasks.filter((task) => {
+  const updateLocalTask = async (item: Task) => {
+    setLoadingLocal(true);
+
+    try {
+      const newTasks = locaTasks.filter((task) => {
         if (task.title === item.title) {
           task.isCompleted = !task.isCompleted;
         }
 
         return locaTasks;
-      }),
-    );
+      });
+
+      setLocalTasks(newTasks);
+      await AsyncStorage.setItem(
+        '@InfocusApp:tasks',
+        JSON.stringify(locaTasks),
+      );
+
+      setLoadingLocal(false);
+    } catch (e) {
+      setLoadingLocal(false);
+      console.error('Houve um erro ao atualizar dados');
+    }
   };
 
   return (
     <TaskContext.Provider
       value={{
         locaTasks,
+        loadingLocal,
         createLocalTask,
         removeLocalTask,
         updateLocalTask,
