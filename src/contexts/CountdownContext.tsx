@@ -22,11 +22,21 @@ export const CountdownContext = createContext({} as CountdownContextData);
 
 let countdownTimeout: number;
 
-const restingTime = 0.2 * 60;
-const workingTime = 0.5 * 60;
+const RESTING_TIME = 0.2 * 60;
+const WORKING_TIME = 0.5 * 60;
+
+const soundAlert = new Sound(
+  'notification.mp3',
+  Sound.MAIN_BUNDLE,
+  (error: any) => {
+    if (error) {
+      console.error('Sound not found');
+    }
+  },
+);
 
 export function CountdownProvider({ children }: CountdownProviderProps) {
-  const [time, setTime] = useState(workingTime);
+  const [time, setTime] = useState(WORKING_TIME);
   const [countdownIsPlaying, setCountdownIsPlaying] = useState(false);
   const [isResting, setIsResting] = useState(false);
   const [key, setKey] = useState(0);
@@ -34,19 +44,9 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
 
-  const soundAlert = new Sound(
-    'notification.mp3',
-    Sound.MAIN_BUNDLE,
-    (error: any) => {
-      if (error) {
-        console.error('Sound not found');
-      }
-    },
-  );
-
   // Change Time
   useEffect(() => {
-    setTime(isResting ? restingTime : workingTime);
+    setTime(isResting ? RESTING_TIME : WORKING_TIME);
     setKey((prevKey) => prevKey + 1);
   }, [isResting]);
 
@@ -60,11 +60,8 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   }, [countdownIsPlaying, time]);
 
   const playSound = () => {
-    soundAlert.play((success: boolean) => {
-      if (!success) {
-        console.error('Sound not play');
-      }
-    });
+    soundAlert.play();
+    soundAlert.stop();
   };
 
   const startCountdown = () => {
@@ -76,7 +73,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   };
 
   const resetCountdown = () => {
-    setTime(isResting ? restingTime : workingTime);
+    setTime(isResting ? RESTING_TIME : WORKING_TIME);
     clearTimeout(countdownTimeout);
     setKey((prevKey) => prevKey + 1);
   };
