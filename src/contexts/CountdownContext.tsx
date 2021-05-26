@@ -22,8 +22,8 @@ export const CountdownContext = createContext({} as CountdownContextData);
 
 let countdownTimeout: number;
 
-const RESTING_TIME = 0.2 * 60;
-const WORKING_TIME = 0.5 * 60;
+const RESTING_TIME = 0.1 * 60;
+const WORKING_TIME = 0.3 * 60;
 
 const soundAlert = new Sound(
   require('../assets/sound/notification.mp3'),
@@ -60,8 +60,9 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   }, [countdownIsPlaying, time]);
 
   const playSound = () => {
-    soundAlert.play();
-    soundAlert.stop();
+    soundAlert.play((success) => {
+      console.log(success ? 'Successfully finished playing' : 'Failed playing');
+    });
   };
 
   const startCountdown = () => {
