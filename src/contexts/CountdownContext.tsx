@@ -26,7 +26,7 @@ const RESTING_TIME = 0.2 * 60;
 const WORKING_TIME = 0.5 * 60;
 
 const soundAlert = new Sound(
-  'notification.mp3',
+  require('../assets/sound/notification.mp3'),
   Sound.MAIN_BUNDLE,
   (error: any) => {
     if (error) {

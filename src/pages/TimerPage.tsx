@@ -11,7 +11,7 @@ import { AuthContext } from '../contexts/AuthContext';
 
 import { Task } from '../types/Task';
 
-import { Color } from '../config/style';
+import { Color, scale } from '../config/style';
 
 export function TimerPage() {
   const { locaTasks } = useContext(TaskContext);
@@ -35,7 +35,9 @@ export function TimerPage() {
       {tasksNotCompleted.length > 0 && (
         <TaskComponent item={tasksNotCompleted[0]} />
       )}
-      <Countdown />
+      <View style={styles.countdownContainer}>
+        <Countdown />
+      </View>
       <View style={styles.buttonsContainer}>
         <StartOrPauseButton />
         <ResetButton />
@@ -45,6 +47,9 @@ export function TimerPage() {
 }
 
 const styles = StyleSheet.create({
+  countdownContainer: {
+    padding: scale(5),
+  },
   container: {
     flex: 1,
     justifyContent: 'space-evenly',
