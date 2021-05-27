@@ -12,8 +12,8 @@ import { AuthContext } from '../contexts/AuthContext';
 import { Color, FontSize, scale } from '../config/style';
 
 export function LoginPage({ navigation }: any) {
-  const [email, setEmail] = useState('user3@hotmail.com');
-  const [password, setPassword] = useState('123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const { errorMessage, signIn, clearErrors, loading } =
     useContext(AuthContext);

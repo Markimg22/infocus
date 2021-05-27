@@ -6,6 +6,7 @@ import api from '../services/api';
 
 import { User } from '../types/User';
 import { Task } from '../types/Task';
+import { Performance } from '../types/Performance';
 
 interface ResponseData {
   user: User;
@@ -16,7 +17,12 @@ interface AuthContextData {
   loggedInUser: User | null;
   errorMessage: string;
   tasks: Task[];
+  performance: Performance;
   loading: boolean;
+  clearErrors: () => void;
+  updateTotalTasksCompleted: (value: number) => Promise<void>;
+  updateTotalWorkingTime: (value: number) => Promise<void>;
+  updateTotalRestTime: (value: number) => Promise<void>;
   createTask: (title: string) => Promise<void>;
   removeTask: (id: string) => Promise<void>;
   updateTask: (id: string, value: boolean) => Promise<void>;
@@ -27,7 +33,6 @@ interface AuthContextData {
   ) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
-  clearErrors: () => void;
 }
 
 interface AuthProps {
@@ -38,9 +43,13 @@ export const AuthContext = createContext({} as AuthContextData);
 
 export function AuthProvider({ children }: AuthProps) {
   const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+
   const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [performance, setPerformance] = useState<Performance>(
+    {} as Performance,
+  );
 
   useEffect(() => {
     async function loadStorageData() {
@@ -49,7 +58,9 @@ export function AuthProvider({ children }: AuthProps) {
 
       if (storageUser && storageToken) {
         setLoggedInUser(JSON.parse(storageUser));
-        getTasksDatabase();
+
+        await getTasksDatabase();
+        await getPerformanceDatabase();
       }
     }
 
@@ -59,6 +70,66 @@ export function AuthProvider({ children }: AuthProps) {
   const clearErrors = () => {
     setErrorMessage('');
   };
+
+  /**
+   * PERFORMANCE
+   */
+
+  const getPerformanceDatabase = async () => {
+    setLoading(true);
+    try {
+      const response = await api.get('/user/performance');
+      setPerformance(response.data as Performance);
+      setLoading(false);
+    } catch (response) {
+      setLoading(false);
+      Alert.alert('Houve um erro', response.data.errors);
+    }
+  };
+
+  const updateTotalTasksCompleted = async (value: number) => {
+    setLoading(true);
+    try {
+      const response = await api.put('/performance/totalTasksCompleted', {
+        value,
+      });
+      setPerformance(response.data as Performance);
+      setLoading(false);
+    } catch (response) {
+      setLoading(false);
+      Alert.alert('Houve um erro', response.data.errros);
+    }
+  };
+
+  const updateTotalWorkingTime = async (value: number) => {
+    setLoading(true);
+    try {
+      const response = await api.put('/performance/totalWorkingTime', {
+        value,
+      });
+      setPerformance(response.data as Performance);
+      setLoading(false);
+    } catch (response) {
+      setLoading(false);
+      Alert.alert('Houve um erro', response.data.errors);
+    }
+  };
+
+  const updateTotalRestTime = async (value: number) => {
+    setLoading(true);
+    try {
+      const response = await api.put('/performance/totalRestTime', { value });
+      setPerformance(response.data as Performance);
+      setLoading(false);
+    } catch (response) {
+      setLoading(false);
+      Alert.alert('Houve um erro', response.data.errors);
+    }
+  };
+
+  /**
+   * TASKS
+   */
 
   const getTasksDatabase = async () => {
     try {
@@ -96,6 +167,12 @@ export function AuthProvider({ children }: AuthProps) {
   const updateTask = async (id: string, value: boolean) => {
     setLoading(true);
     try {
+      if (value) {
+        await updateTotalTasksCompleted(1);
+      } else {
+        await updateTotalTasksCompleted(-1);
+      }
+
       const response = await api.put(`/user/tasks/${id}`, { value });
       setTasks(response.data as Task[]);
       setLoading(false);
@@ -104,6 +181,10 @@ export function AuthProvider({ children }: AuthProps) {
       setLoading(false);
     }
   };
+
+  /**
+   * SIGNIN & REGISTER & SIGNOUT
+   */
 
   const register = async (
     email: string,
@@ -135,6 +216,7 @@ export function AuthProvider({ children }: AuthProps) {
       ]);
 
       await getTasksDatabase();
+      await getPerformanceDatabase();
 
       setLoggedInUser(user);
       clearErrors();
@@ -149,6 +231,7 @@ export function AuthProvider({ children }: AuthProps) {
     await AsyncStorage.multiRemove(['@InfocusApp:user', '@InfocusApp:token']);
     setLoggedInUser(null);
     setTasks([]);
+    setPerformance({} as Performance);
   };
 
   return (
@@ -157,14 +240,18 @@ export function AuthProvider({ children }: AuthProps) {
         loggedInUser,
         errorMessage,
         tasks,
+        performance,
         loading,
+        clearErrors,
+        updateTotalTasksCompleted,
+        updateTotalWorkingTime,
+        updateTotalRestTime,
         createTask,
         removeTask,
         updateTask,
         register,
         signIn,
         signOut,
-        clearErrors,
       }}>
       {children}
     </AuthContext.Provider>

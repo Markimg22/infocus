@@ -1,6 +1,13 @@
-import React, { createContext, useState, useEffect, ReactNode } from 'react';
-
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  useContext,
+  ReactNode,
+} from 'react';
 import Sound from 'react-native-sound';
+
+import { AuthContext } from './AuthContext';
 
 interface CountdownContextData {
   time: number;
@@ -22,8 +29,8 @@ export const CountdownContext = createContext({} as CountdownContextData);
 
 let countdownTimeout: number;
 
-const RESTING_TIME = 0.1 * 60;
-const WORKING_TIME = 0.3 * 60;
+const RESTING_TIME = 0.5 * 60;
+const WORKING_TIME = 1 * 60;
 
 const soundAlert = new Sound(
   require('../assets/sound/notification.mp3'),
@@ -40,6 +47,9 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   const [countdownIsPlaying, setCountdownIsPlaying] = useState(false);
   const [isResting, setIsResting] = useState(false);
   const [key, setKey] = useState(0);
+
+  const { loggedInUser, updateTotalWorkingTime, updateTotalRestTime } =
+    useContext(AuthContext);
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
@@ -61,7 +71,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
 
   const playSound = () => {
     soundAlert.play((success) => {
-      console.log(success ? 'Successfully finished playing' : 'Failed playing');
+      console.log(success ? 'Successfully playing' : 'Failed playing');
     });
   };
 
@@ -82,6 +92,14 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   const changeCountdown = () => {
     setIsResting(!isResting);
     playSound();
+
+    if (loggedInUser) {
+      if (isResting) {
+        updateTotalRestTime(RESTING_TIME); // save as seconds
+      } else {
+        updateTotalWorkingTime(WORKING_TIME); // save as seconds
+      }
+    }
   };
 
   return (
