@@ -69,5 +69,6 @@ const styles = StyleSheet.create({
     fontSize: FontSize.title,
     fontWeight: 'bold',
     marginLeft: scale(10),
+    maxWidth: scale(230),
   },
 });
