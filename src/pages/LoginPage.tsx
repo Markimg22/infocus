@@ -35,6 +35,7 @@ export function LoginPage({ navigation }: any) {
           placeholder="Insira seu e-mail"
           value={email}
           onChangeText={(text) => setEmail(text)}
+          autoCapitalize={'none'}
         />
         <Input
           textContentType="password"
