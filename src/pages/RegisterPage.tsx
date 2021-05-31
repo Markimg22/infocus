@@ -1,5 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+  ScrollView,
+} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 
 import { Input } from '../components/Input';
@@ -26,7 +33,7 @@ export function RegisterPage({ navigation }: any) {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
       <Text style={styles.title}>
         Cadastre uma conta para ter acesso as suas tarefas e desempenho em
         qualquer dispositivo.
@@ -80,10 +87,13 @@ export function RegisterPage({ navigation }: any) {
             loading
           }
           loading={loading}
-          onPress={() => {
+          onPress={async () => {
             if (acceptedTerms) {
-              register(email, password, passwordAgain);
-              navigation.navigate('BottomBar');
+              await register(email, password, passwordAgain).then(() => {
+                if (errorMessage !== '') {
+                  navigation.navigate('BottomBar');
+                }
+              });
             } else {
               Alert.alert(
                 'Aceitar Termos de Uso!',
@@ -101,7 +111,7 @@ export function RegisterPage({ navigation }: any) {
           <Text style={styles.accountText}>Eu tenho uma conta</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -129,6 +139,7 @@ const styles = StyleSheet.create({
   accountContainer: {
     marginTop: scale(14),
     alignSelf: 'flex-start',
+    marginBottom: scale(20),
   },
   accountText: {
     color: Color.grayColor,

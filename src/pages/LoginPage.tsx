@@ -1,5 +1,11 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 
 import { Input } from '../components/Input';
 import { PrimaryButton } from '../components/PrimaryButton';
@@ -19,7 +25,7 @@ export function LoginPage({ navigation }: any) {
     useContext(AuthContext);
 
   return (
-    <View style={styles.container}>
+    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
       <Text style={styles.title}>
         Entre na sua conta para ter acesso as suas tarefas e desempenho.
       </Text>
@@ -71,7 +77,7 @@ export function LoginPage({ navigation }: any) {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -85,6 +91,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     width: '90%',
     marginTop: scale(20),
+    marginBottom: scale(20),
   },
   orContainer: {
     marginTop: scale(25),
