@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-import { CountdownContext } from 'contexts/CountdownContext';
+import { CountdownContext } from '../contexts/CountdownContext';
 
 import { Color } from '../config/style';
 

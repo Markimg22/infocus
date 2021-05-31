@@ -11,7 +11,7 @@ import { Input } from '../components/Input';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { ErrorComponent } from '../components/ErrorComponent';
 
-import { Google, Facebook } from '../assets/svg/icon';
+// import { Google, Facebook } from '../assets/svg/icon';
 
 import { AuthContext } from '../contexts/AuthContext';
 
@@ -60,7 +60,7 @@ export function LoginPage({ navigation }: any) {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.orContainer}>
+      {/* <View style={styles.orContainer}>
         <View style={styles.line} />
         <Text style={styles.text}>Ou</Text>
         <View style={styles.line} />
@@ -76,7 +76,7 @@ export function LoginPage({ navigation }: any) {
             <Facebook />
           </TouchableOpacity>
         </View>
-      </View>
+      </View> */}
     </ScrollView>
   );
 }

@@ -3,7 +3,7 @@ import { View, ScrollView, Text, StyleSheet, Dimensions } from 'react-native';
 
 import { PrimaryButton } from '../components/PrimaryButton';
 
-import { Color, FontSize, scale } from 'config/style';
+import { Color, FontSize, scale } from '../config/style';
 
 const itens: string[] = [
   'O Infocus se baseia no método Pomodoro, ciclos para gerenciar seu tempo, aumentando seu desempenho e concentração.',

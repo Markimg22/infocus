@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
-import { CountdownContext } from 'contexts/CountdownContext';
+import { CountdownContext } from '../contexts/CountdownContext';
 
 import { Color, FontSize, scale } from '../config/style';
 
