@@ -14,7 +14,7 @@ import { Task } from '../types/Task';
 import { Color, scale } from '../config/style';
 
 export function TimerPage() {
-  const { locaTasks } = useContext(TaskContext);
+  const { localTasks } = useContext(TaskContext);
   const { tasks, loggedInUser } = useContext(AuthContext);
 
   let tasksNotCompleted: Task[] = [];
@@ -31,7 +31,7 @@ export function TimerPage() {
     <View style={styles.container}>
       {loggedInUser
         ? showTaskNotComplete(tasks)
-        : showTaskNotComplete(locaTasks)}
+        : showTaskNotComplete(localTasks)}
       {tasksNotCompleted.length > 0 && (
         <TaskComponent item={tasksNotCompleted[0]} />
       )}

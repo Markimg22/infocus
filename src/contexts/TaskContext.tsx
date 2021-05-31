@@ -5,7 +5,7 @@ import { Alert } from 'react-native';
 import { Task } from '../types/Task';
 
 interface TaskContextData {
-  locaTasks: Task[];
+  localTasks: Task[];
   loadingLocal: boolean;
   createLocalTask: (title: string) => Promise<Task[] | undefined>;
   removeLocalTask: (item: Task) => Promise<Task[] | undefined>;
@@ -19,7 +19,7 @@ interface TaskProps {
 export const TaskContext = createContext({} as TaskContextData);
 
 export function TaskProvider({ children }: TaskProps) {
-  const [locaTasks, setLocalTasks] = useState<Task[]>([]);
+  const [localTasks, setLocalTasks] = useState<Task[]>([]);
   const [loadingLocal, setLoadingLocal] = useState(false);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export function TaskProvider({ children }: TaskProps) {
     setLoadingLocal(true);
 
     try {
-      const search = locaTasks.filter((task) => task.title === title);
+      const search = localTasks.filter((task) => task.title === title);
 
       if (title === '') {
         Alert.alert('Houve um erro', 'Insira um título para sua tarefa.');
@@ -54,13 +54,13 @@ export function TaskProvider({ children }: TaskProps) {
         return;
       }
 
-      const newTasks = [...locaTasks, { title, isCompleted: false }];
+      const newTasks = [...localTasks, { title, isCompleted: false }];
 
       setLocalTasks(newTasks);
       await AsyncStorage.setItem('@InfocusApp:tasks', JSON.stringify(newTasks));
 
       setLoadingLocal(false);
-      return locaTasks;
+      return localTasks;
     } catch (e) {
       setLoadingLocal(false);
       console.error('Houve um erro ao criar tareafa');
@@ -71,13 +71,13 @@ export function TaskProvider({ children }: TaskProps) {
     setLoadingLocal(true);
 
     try {
-      const newTasks = locaTasks.filter((task) => task !== item);
+      const newTasks = localTasks.filter((task) => task !== item);
 
       setLocalTasks(newTasks);
       await AsyncStorage.setItem('@InfocusApp:tasks', JSON.stringify(newTasks));
 
       setLoadingLocal(false);
-      return locaTasks;
+      return localTasks;
     } catch (e) {
       setLoadingLocal(false);
       console.error('Houve um erro ao remover tarefa');
@@ -88,12 +88,12 @@ export function TaskProvider({ children }: TaskProps) {
     setLoadingLocal(true);
 
     try {
-      const newTasks = locaTasks.filter((task) => {
+      const newTasks = localTasks.filter((task) => {
         if (task.title === item.title) {
           task.isCompleted = !task.isCompleted;
         }
 
-        return locaTasks;
+        return localTasks;
       });
 
       setLocalTasks(newTasks);
@@ -109,7 +109,7 @@ export function TaskProvider({ children }: TaskProps) {
   return (
     <TaskContext.Provider
       value={{
-        locaTasks,
+        localTasks,
         loadingLocal,
         createLocalTask,
         removeLocalTask,

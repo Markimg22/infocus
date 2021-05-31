@@ -7,13 +7,13 @@ import { AuthContext } from '../contexts/AuthContext';
 import { TaskComponent } from './TaskComponent';
 
 export function ListTasks() {
-  const { locaTasks } = useContext(TaskContext);
+  const { localTasks } = useContext(TaskContext);
   const { tasks, loggedInUser } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={loggedInUser ? tasks : locaTasks}
+        data={loggedInUser ? tasks : localTasks}
         keyExtractor={(_, index) => String(index)}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => {
