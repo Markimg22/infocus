@@ -7,7 +7,7 @@ import { CountdownContext } from '../contexts/CountdownContext';
 import { Color, FontSize, scale } from '../config/style';
 
 export function Countdown() {
-  const { time, minutes, seconds, countdownIsPlaying, key, isResting } =
+  const { time, minutes, seconds, countdownIsPlaying, key } =
     useContext(CountdownContext);
 
   const [minuteLeft, minuteRight] = String(minutes).padStart(2, '0').split('');
