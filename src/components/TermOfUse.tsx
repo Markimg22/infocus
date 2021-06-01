@@ -208,8 +208,8 @@ const styles = StyleSheet.create({
   },
   italicText: {
     color: Color.primaryColor,
-    textAlign: 'center',
     fontStyle: 'italic',
+    marginBottom: scale(5),
   },
   subTitle: {
     color: Color.primaryColor,

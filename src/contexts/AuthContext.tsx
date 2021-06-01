@@ -193,14 +193,22 @@ export function AuthProvider({ children }: AuthProps) {
   ) => {
     setLoading(true);
     try {
-      await api.post('/register', { email, password, passwordAgain });
+      const response = await api.post('/register', {
+        email,
+        password,
+        passwordAgain,
+      });
       await signIn(email, password);
 
-      clearErrors();
       setLoading(false);
+      clearErrors();
+
+      return response.data;
     } catch (response) {
       setErrorMessage(response.data.errors);
       setLoading(false);
+
+      return response.data;
     }
   };
 

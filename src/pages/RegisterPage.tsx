@@ -90,11 +90,12 @@ export function RegisterPage({ navigation }: any) {
           loading={loading}
           onPress={async () => {
             if (acceptedTerms) {
-              await register(email, password, passwordAgain).then(() => {
-                if (errorMessage !== '') {
-                  navigation.navigate('BottomBar');
-                }
-              });
+              const result = await register(email, password, passwordAgain);
+
+              // @ts-ignore
+              if (!result.errors) {
+                navigation.navigate('BottomBar');
+              }
             } else {
               Alert.alert(
                 'Aceitar Termos de Uso!',
