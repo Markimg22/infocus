@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 
 import { Countdown } from '../components/Countdown';
 import { StartOrPauseButton } from '../components/StartOrPauseButton';
@@ -33,7 +33,11 @@ export function TimerPage() {
         ? showTaskNotComplete(tasks)
         : showTaskNotComplete(localTasks)}
       {tasksNotCompleted.length > 0 && (
-        <TaskComponent item={tasksNotCompleted[0]} />
+        <ScrollView
+          style={styles.scrollViewTasks}
+          contentContainerStyle={styles.contentContainerStyle}>
+          <TaskComponent item={tasksNotCompleted[0]} />
+        </ScrollView>
       )}
       <View style={styles.countdownContainer}>
         <Countdown />
@@ -47,6 +51,13 @@ export function TimerPage() {
 }
 
 const styles = StyleSheet.create({
+  contentContainerStyle: {
+    alignItems: 'center',
+  },
+  scrollViewTasks: {
+    maxHeight: '12%',
+    width: '100%',
+  },
   countdownContainer: {
     padding: scale(5),
   },

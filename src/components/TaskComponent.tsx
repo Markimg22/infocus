@@ -29,7 +29,10 @@ export function TaskComponent({ item }: TaskProps) {
         }
       />
       <Text
-        style={item.isCompleted ? styles.taskDoneText : styles.taskNormalText}>
+        style={[
+          item.isCompleted ? styles.taskDoneText : styles.taskNormalText,
+          styles.text,
+        ]}>
         {item.title}
       </Text>
       <Icon
@@ -46,13 +49,22 @@ export function TaskComponent({ item }: TaskProps) {
 }
 
 const styles = StyleSheet.create({
+  text: {
+    maxWidth: '80%',
+    padding: scale(5),
+    fontSize: FontSize.medium,
+  },
   container: {
-    width: scale(350),
+    width: '90%',
     backgroundColor: Color.primaryColor,
+
     flexDirection: 'row',
     alignSelf: 'center',
+    alignItems: 'center',
     justifyContent: 'space-between',
+
     borderRadius: scale(15),
+
     padding: scale(10),
     margin: scale(10),
   },
@@ -63,13 +75,11 @@ const styles = StyleSheet.create({
   },
   taskNormalText: {
     color: Color.contrastColor,
-    fontSize: FontSize.medium,
     fontWeight: 'bold',
   },
   taskDoneText: {
     textDecorationLine: 'line-through',
     color: Color.contrastColor,
-    fontSize: FontSize.medium,
     fontWeight: 'bold',
   },
   deleteIcon: {

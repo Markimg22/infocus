@@ -7,7 +7,7 @@ import { CountdownContext } from '../contexts/CountdownContext';
 import { Color, FontSize, scale } from '../config/style';
 
 export function Countdown() {
-  const { time, minutes, seconds, countdownIsPlaying, key, changeCountdown } =
+  const { time, minutes, seconds, countdownIsPlaying, key, isResting } =
     useContext(CountdownContext);
 
   const [minuteLeft, minuteRight] = String(minutes).padStart(2, '0').split('');
@@ -20,9 +20,8 @@ export function Countdown() {
       colors={Color.purpleColor}
       strokeWidth={scale(15)}
       size={scale(200)}
-      duration={time}
-      initialRemainingTime={time}
-      onComplete={changeCountdown}>
+      duration={time + 1}
+      initialRemainingTime={time + 1}>
       {({ remainingTime }) => {
         if (typeof remainingTime !== 'undefined') {
           return (

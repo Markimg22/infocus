@@ -81,9 +81,11 @@ export function AuthProvider({ children }: AuthProps) {
       const response = await api.get('/user/performance');
       setPerformance(response.data as Performance);
       setLoading(false);
+
+      console.log('Get performance Database');
     } catch (response) {
       setLoading(false);
-      Alert.alert('Houve um erro', response.data.errors);
+      Alert.alert('Houve um erro', await response.data.errors);
     }
   };
 
@@ -95,9 +97,11 @@ export function AuthProvider({ children }: AuthProps) {
       });
       setPerformance(response.data as Performance);
       setLoading(false);
+
+      console.log('Update total tasks completed');
     } catch (response) {
       setLoading(false);
-      Alert.alert('Houve um erro', response.data.errros);
+      Alert.alert('Houve um erro', await response.data.errros);
     }
   };
 
@@ -109,6 +113,8 @@ export function AuthProvider({ children }: AuthProps) {
       });
       setPerformance(response.data as Performance);
       setLoading(false);
+
+      console.log('Update total working time');
     } catch (response) {
       setLoading(false);
       Alert.alert('Houve um erro', response.data.errors);
@@ -121,6 +127,8 @@ export function AuthProvider({ children }: AuthProps) {
       const response = await api.put('/performance/totalRestTime', { value });
       setPerformance(response.data as Performance);
       setLoading(false);
+
+      console.log('Update total rest time');
     } catch (response) {
       setLoading(false);
       Alert.alert('Houve um erro', response.data.errors);
@@ -132,11 +140,17 @@ export function AuthProvider({ children }: AuthProps) {
    */
 
   const getTasksDatabase = async () => {
+    setLoading(true);
     try {
       const response = await api.get('/user/tasks');
+
       setTasks(response.data as Task[]);
+      setLoading(false);
+
+      console.log('Get tasks database');
     } catch (response) {
       Alert.alert('Houve um erro', response.data.errors);
+      setLoading(false);
     }
   };
 
@@ -146,6 +160,8 @@ export function AuthProvider({ children }: AuthProps) {
       const response = await api.post('/user/tasks', { title });
       setTasks(response.data as Task[]);
       setLoading(false);
+
+      console.log('Create task');
     } catch (response) {
       Alert.alert('Houve um erro', response.data.errors);
       setLoading(false);
@@ -158,6 +174,8 @@ export function AuthProvider({ children }: AuthProps) {
       const response = await api.delete(`/user/tasks/${id}`);
       setTasks(response.data as Task[]);
       setLoading(false);
+
+      console.log('Remove task');
     } catch (response) {
       Alert.alert('Houve um erro', response.data.errors);
       setLoading(false);
@@ -176,6 +194,8 @@ export function AuthProvider({ children }: AuthProps) {
       const response = await api.put(`/user/tasks/${id}`, { value });
       setTasks(response.data as Task[]);
       setLoading(false);
+
+      console.log('Update task');
     } catch (response) {
       Alert.alert('Houve um erro', response.data.errors);
       setLoading(false);
@@ -203,6 +223,7 @@ export function AuthProvider({ children }: AuthProps) {
       setLoading(false);
       clearErrors();
 
+      console.log('Register');
       return response.data;
     } catch (response) {
       setErrorMessage(response.data.errors);
@@ -229,6 +250,8 @@ export function AuthProvider({ children }: AuthProps) {
       setLoggedInUser(user);
       clearErrors();
       setLoading(false);
+
+      console.log('Sign in');
     } catch (response) {
       setErrorMessage(response.data.errors);
       setLoading(false);
@@ -237,9 +260,12 @@ export function AuthProvider({ children }: AuthProps) {
 
   const signOut = async () => {
     await AsyncStorage.multiRemove(['@InfocusApp:user', '@InfocusApp:token']);
+
     setLoggedInUser(null);
     setTasks([]);
     setPerformance({} as Performance);
+
+    console.log('Sign out');
   };
 
   return (

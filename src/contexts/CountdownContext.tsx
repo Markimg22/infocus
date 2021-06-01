@@ -15,6 +15,7 @@ interface CountdownContextData {
   seconds: number;
   countdownIsPlaying: boolean;
   key: number;
+  isResting: boolean;
   changeCountdown: () => void;
   startCountdown: () => void;
   pauseCountdown: () => void;
@@ -58,35 +59,48 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   useEffect(() => {
     setTime(isResting ? RESTING_TIME : WORKING_TIME);
     setKey((prevKey) => prevKey + 1);
+
+    console.log(`Change Countdown to ${isResting ? 'Rest' : 'Work'}`);
   }, [isResting]);
 
   // Countdown
   useEffect(() => {
-    if (countdownIsPlaying && time > 1) {
+    if (countdownIsPlaying && time > 0) {
       countdownTimeout = setTimeout(() => {
         setTime(time - 1);
       }, 1000);
     }
+
+    if (time === 0) {
+      changeCountdown();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countdownIsPlaying, time]);
 
   const playSound = () => {
     soundAlert.play((success) => {
-      console.log(success ? 'Successfully playing' : 'Failed playing');
+      console.log(
+        success ? 'Successfully playing sound' : 'Failed playing sound',
+      );
     });
   };
 
   const startCountdown = () => {
     setCountdownIsPlaying(true);
+    console.log('Start Countdown');
   };
 
   const pauseCountdown = () => {
     setCountdownIsPlaying(false);
+    console.log('Pause Countdown');
   };
 
   const resetCountdown = () => {
     setTime(isResting ? RESTING_TIME : WORKING_TIME);
     clearTimeout(countdownTimeout);
     setKey((prevKey) => prevKey + 1);
+
+    console.log('Reset Countdown');
   };
 
   const changeCountdown = () => {
@@ -110,6 +124,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
         seconds,
         countdownIsPlaying,
         key,
+        isResting,
         changeCountdown,
         startCountdown,
         pauseCountdown,

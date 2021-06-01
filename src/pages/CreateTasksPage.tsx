@@ -21,7 +21,7 @@ export function CreateTasksPage() {
   const [title, setTitle] = useState('');
 
   const { createLocalTask, loadingLocal } = useContext(TaskContext);
-  const { createTask, loggedInUser, errorMessage, clearErrors, loading } =
+  const { createTask, loggedInUser, errorMessage, loading } =
     useContext(AuthContext);
 
   return (
@@ -38,7 +38,6 @@ export function CreateTasksPage() {
         <Input
           value={title}
           placeholder="Insira uma tarefa"
-          maxLength={20}
           onChangeText={(text) => setTitle(text)}
         />
         {!!errorMessage && <ErrorComponent message={errorMessage} />}
@@ -53,7 +52,6 @@ export function CreateTasksPage() {
               createLocalTask(title);
             }
 
-            clearErrors();
             setTitle('');
           }}
         />
