@@ -7,7 +7,7 @@ import { Color, FontSize, scale } from '../config/style';
 
 const itens: string[] = [
   'O Infocus se baseia no método Pomodoro, ciclos para gerenciar seu tempo, aumentando seu desempenho e concentração.',
-  'Dividi suas tarefas em períodos de 25 minutos, separados por intervalos de 5 minutos.',
+  'Divide suas tarefas em períodos de 25 minutos, separados por intervalos de 5 minutos.',
   'Cadastre suas tarefas, concentre-se e deixe o resto conosco. 😉',
 ];
 
@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: scale(30),
+    color: Color.primaryColor,
   },
   itemText: {
     textAlign: 'center',

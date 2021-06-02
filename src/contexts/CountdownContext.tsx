@@ -1,20 +1,17 @@
 import React, {
   createContext,
   useState,
-  useEffect,
   useContext,
   ReactNode,
+  useEffect,
 } from 'react';
 import Sound from 'react-native-sound';
 
 import { AuthContext } from './AuthContext';
 
 interface CountdownContextData {
-  time: number;
-  minutes: number;
-  seconds: number;
-  countdownIsPlaying: boolean;
   key: number;
+  countdownIsPlaying: boolean;
   isResting: boolean;
   changeCountdown: () => void;
   startCountdown: () => void;
@@ -30,8 +27,8 @@ export const CountdownContext = createContext({} as CountdownContextData);
 
 let countdownTimeout: number;
 
-const RESTING_TIME = 0.5 * 60;
-const WORKING_TIME = 1 * 60;
+export const RESTING_TIME = 5 * 60;
+export const WORKING_TIME = 25 * 60;
 
 const soundAlert = new Sound(
   require('../assets/sound/notification.mp3'),
@@ -44,38 +41,19 @@ const soundAlert = new Sound(
 );
 
 export function CountdownProvider({ children }: CountdownProviderProps) {
-  const [time, setTime] = useState(WORKING_TIME);
+  const [key, setKey] = useState(0);
   const [countdownIsPlaying, setCountdownIsPlaying] = useState(false);
   const [isResting, setIsResting] = useState(false);
-  const [key, setKey] = useState(0);
 
   const { loggedInUser, updateTotalWorkingTime, updateTotalRestTime } =
     useContext(AuthContext);
 
-  const minutes = Math.floor(time / 60);
-  const seconds = time % 60;
-
   // Change Time
   useEffect(() => {
-    setTime(isResting ? RESTING_TIME : WORKING_TIME);
     setKey((prevKey) => prevKey + 1);
 
     console.log(`Change Countdown to ${isResting ? 'Rest' : 'Work'}`);
   }, [isResting]);
-
-  // Countdown
-  useEffect(() => {
-    if (countdownIsPlaying && time > 0) {
-      countdownTimeout = setTimeout(() => {
-        setTime(time - 1);
-      }, 1000);
-    }
-
-    if (time === 0) {
-      changeCountdown();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [countdownIsPlaying, time]);
 
   const playSound = () => {
     soundAlert.play((success) => {
@@ -96,7 +74,6 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   };
 
   const resetCountdown = () => {
-    setTime(isResting ? RESTING_TIME : WORKING_TIME);
     clearTimeout(countdownTimeout);
     setKey((prevKey) => prevKey + 1);
 
@@ -119,11 +96,8 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   return (
     <CountdownContext.Provider
       value={{
-        time,
-        minutes,
-        seconds,
-        countdownIsPlaying,
         key,
+        countdownIsPlaying,
         isResting,
         changeCountdown,
         startCountdown,
