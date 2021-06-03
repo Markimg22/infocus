@@ -53,8 +53,7 @@ const styles = StyleSheet.create({
   },
   iconAvatar: {
     color: Color.primaryColor,
-    fontSize: scale(60),
-    borderColor: Color.primaryColor,
+    fontSize: scale(50),
   },
   container: {
     flexDirection: 'row',

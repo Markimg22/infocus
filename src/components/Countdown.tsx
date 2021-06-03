@@ -17,6 +17,7 @@ export function Countdown() {
   return (
     <CountdownCircleTimer
       key={key}
+      isLinearGradient={false}
       isPlaying={countdownIsPlaying}
       colors={Color.purpleColor}
       strokeWidth={scale(15)}
