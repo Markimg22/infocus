@@ -6,7 +6,7 @@ import { PrimaryButton } from '../components/PrimaryButton';
 import { Color, FontSize, scale } from '../config/style';
 
 const itens: string[] = [
-  'O Infocus se baseia no método Pomodoro, ciclos para gerenciar seu tempo, aumentando seu desempenho e concentração.',
+  'O INFOCUS se baseia no método Pomodoro, ciclos para gerenciar seu tempo, aumentando seu desempenho e concentração.',
   'Divide suas tarefas em períodos de 25 minutos, separados por intervalos de 5 minutos.',
   'Cadastre suas tarefas, concentre-se e deixe o resto conosco. 😉',
 ];
@@ -38,7 +38,7 @@ export function Onboarding({ navigation }: any) {
         ))}
       </ScrollView>
       <View style={styles.bulletsContainer}>
-        {new Array(3).fill(null).map((_, index) => (
+        {itens.map((_, index) => (
           <View
             key={index}
             style={itemIndex === index ? styles.activeBullet : styles.bullet}
@@ -95,9 +95,11 @@ const styles = StyleSheet.create({
   item: {
     backgroundColor: Color.contrastColor,
     borderRadius: scale(15),
-    width: screenWidth,
+    width: screenWidth - 30,
     justifyContent: 'center',
-    marginVertical: scale(65),
+    marginVertical: scale(80),
+    marginHorizontal: scale(15),
+    padding: scale(5),
   },
   buttonContainer: {
     paddingRight: scale(10),
