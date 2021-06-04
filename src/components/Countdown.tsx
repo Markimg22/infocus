@@ -39,10 +39,9 @@ export function Countdown() {
 
         return (
           <View>
-            <Text
-              style={
-                styles.timerText
-              }>{`${minuteLeft}${minuteRight}:${secondLeft}${secondRight}`}</Text>
+            <Text style={styles.timerText}>
+              {`${minuteLeft}${minuteRight}:${secondLeft}${secondRight}`}
+            </Text>
             <Text style={styles.timerInfoText}>
               {minutes > 1 ? 'minutos restantes' : 'minuto restante'}
             </Text>
