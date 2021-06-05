@@ -23,7 +23,7 @@
 
 ---
 
-<h4 align="center"> 
+<h4 align="center">
 	🚧 Infocus App 🚀 Em construção... 🚧
 </h4>
 
@@ -41,7 +41,7 @@
 
 <h2 id="sobre-o-projeto">💻 Sobre o Projeto</h2>
 
-📝 **Infocus:** *__é uma forma de aumentar seu foco e produtividade, gerenciando seu tempo e tarefas. Com ele você pode registrar suas tarefas e o aplicativo cronometra seu tempo de atividade e descanso.__*
+📝 **Infocus:** *__é uma forma de aumentar seu foco e produtividade, gerenciando seu tempo e tarefas. Com ele você pode registrar suas tarefas e o aplicativo cronometra seu tempo de atividade e descanso, e também mostra dados de seu desempenho.__*
 
 ---
 
@@ -56,7 +56,7 @@ O layout da aplicação está disponível no Figma:
 ### Mobile
 
 <p align="center">
-  <img alt="InfocusApp" title="#InfocusApp" src=".github/infocus-app.png" width="100%"">
+  <img alt="InfocusApp" title="#InfocusApp" src=".github/infocus-app.png" width="100%">
 </p>
 
 ---
@@ -65,18 +65,16 @@ O layout da aplicação está disponível no Figma:
 
 As seguintes ferramentas foram usadas na construção do projeto:
 
-#### **Mobile**  ([React Native](http://www.reactnative.com/))
-
+-   **[React Native](http://www.reactnative.com/)**
 -   **[Typescript](https://www.typescriptlang.org/)**
--   **[React Navigation](https://reactnavigation.org/)**
--   **[React Native SVG](https://github.com/react-native-community/react-native-svg)**
--   **[React Countdown Circle Timer](https://www.npmjs.com/package/react-countdown-circle-timer)**
+-   **[NodeJS](https://www.typescriptlang.org/)**
+-   **[Yarn](https://www.typescriptlang.org/)**
 
 ---
 
 <h2 id="autores">🦸 Autores</h2>
 
-| [<img src="https://avatars1.githubusercontent.com/u/61772359?s=400&u=bc1cc2d6907c49f1c699a944838b87409a77d5cc&v=4" width=115 > <br> <sub> Marcos Campos </sub>](https://github.com/Markimg22) | [<img src="https://avatars0.githubusercontent.com/u/47955200?s=400&v=4" width=115 > <br> <sub> Gabriel Fonseca </sub>](https://github.com/gabrielbugarelli) | 
-| :---: | :---: 
+| [<img src="https://avatars1.githubusercontent.com/u/61772359?s=400&u=bc1cc2d6907c49f1c699a944838b87409a77d5cc&v=4" width=115 > <br> <sub> Marcos Campos </sub>](https://github.com/Markimg22) | [<img src="https://avatars0.githubusercontent.com/u/47955200?s=400&v=4" width=115 > <br> <sub> Gabriel Fonseca </sub>](https://github.com/gabrielbugarelli) |
+| :---: | :---:
 
 ---
