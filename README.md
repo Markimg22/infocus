@@ -65,11 +65,11 @@ O layout da aplicação está disponível no Figma:
 
 As seguintes ferramentas foram usadas na construção do projeto:
 
--   **[React Native](http://www.reactnative.com/)**
+-   **[React Native](https://reactnative.dev/)**
 -   **[Typescript](https://www.typescriptlang.org/)**
--   **[NodeJS](https://www.typescriptlang.org/)**
+-   **[NodeJS](https://nodejs.org/en/)**
 -   **[MongoDB](https://www.mongodb.com/)**
--   **[Yarn](https://www.typescriptlang.org/)**
+-   **[Yarn](https://yarnpkg.com/)**
 
 ---
 
