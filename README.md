@@ -68,6 +68,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 -   **[React Native](http://www.reactnative.com/)**
 -   **[Typescript](https://www.typescriptlang.org/)**
 -   **[NodeJS](https://www.typescriptlang.org/)**
+-   **[MongoDB](https://www.mongodb.com/)**
 -   **[Yarn](https://www.typescriptlang.org/)**
 
 ---
