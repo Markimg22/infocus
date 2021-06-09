@@ -27,8 +27,8 @@ export const CountdownContext = createContext({} as CountdownContextData);
 
 let countdownTimeout: number;
 
-export const RESTING_TIME = 5 * 60;
-export const WORKING_TIME = 25 * 60;
+export const RESTING_TIME = 2 * 60;
+export const WORKING_TIME = 5 * 60;
 
 const soundAlert = new Sound(
   require('../assets/sound/notification.mp3'),

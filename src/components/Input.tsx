@@ -9,22 +9,33 @@ interface InputProps extends TextInputProps {
 
 export function Input(props: InputProps) {
   return (
-    <View>
-      <TextInput
-        style={[
-          styles.input,
-          { paddingRight: props.rightComponent ? scale(45) : scale(18) },
-        ]}
-        {...props}
-      />
-      <View style={styles.rightComponent}>{props.rightComponent}</View>
-    </View>
+    <>
+      {props.rightComponent ? (
+        <View>
+          <TextInput
+            style={[
+              styles.input,
+              { paddingRight: props.rightComponent ? scale(45) : scale(18) },
+            ]}
+            {...props}
+          />
+          <View style={styles.rightComponent}>{props.rightComponent}</View>
+        </View>
+      ) : (
+        <TextInput
+          style={[
+            styles.input,
+            { paddingRight: props.rightComponent ? scale(45) : scale(18) },
+          ]}
+          {...props}
+        />
+      )}
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   input: {
-    flex: 1,
     backgroundColor: Color.primaryColor,
     color: Color.contrastColor,
     borderRadius: scale(15),
