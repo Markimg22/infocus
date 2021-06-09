@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
 import { Input } from '../components/Input';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { TermOfUse } from '../components/TermOfUse';
@@ -25,6 +27,9 @@ export function RegisterPage({ navigation }: any) {
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [showTermOfUse, setShowTermOfUse] = useState(false);
 
+  const [hidePassword, setHidePassword] = useState(true);
+  const [hidePasswordAgain, setHidePasswordAgain] = useState(true);
+
   const { register, errorMessage, clearErrors, loading } =
     useContext(AuthContext);
 
@@ -40,6 +45,9 @@ export function RegisterPage({ navigation }: any) {
       </Text>
       <View style={styles.form}>
         <Input
+          keyboardType={'email-address'}
+          textContentType={'emailAddress'}
+          autoCompleteType={'email'}
           placeholder="Insira seu e-mail"
           value={email}
           onChangeText={(text) => setEmail(text)}
@@ -50,14 +58,41 @@ export function RegisterPage({ navigation }: any) {
           placeholder="Insira sua senha"
           value={password}
           onChangeText={(text) => setPassword(text)}
-          secureTextEntry
+          secureTextEntry={hidePassword}
+          rightComponent={
+            <TouchableOpacity onPress={() => setHidePassword(!hidePassword)}>
+              {hidePassword ? (
+                <Icon name="eye" size={scale(22)} color={Color.grayColor} />
+              ) : (
+                <Icon
+                  name="eye-slash"
+                  size={scale(22)}
+                  color={Color.grayColor}
+                />
+              )}
+            </TouchableOpacity>
+          }
         />
         <Input
           textContentType="password"
           placeholder="Confirme sua senha"
           value={passwordAgain}
           onChangeText={(text) => setPasswordAgain(text)}
-          secureTextEntry
+          secureTextEntry={hidePasswordAgain}
+          rightComponent={
+            <TouchableOpacity
+              onPress={() => setHidePasswordAgain(!hidePasswordAgain)}>
+              {hidePasswordAgain ? (
+                <Icon name="eye" size={scale(22)} color={Color.grayColor} />
+              ) : (
+                <Icon
+                  name="eye-slash"
+                  size={scale(22)}
+                  color={Color.grayColor}
+                />
+              )}
+            </TouchableOpacity>
+          }
         />
         <View style={styles.checkboxContainer}>
           <CheckBox
